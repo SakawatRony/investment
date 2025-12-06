@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::match(['get', 'post'], '/registration', [LoginController::class, 'register'])->name('registration');
 Route::get('/dashboard', [DashboardController::class, 'index']);
