@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('commissions', function (Blueprint $table) {
-            $table->bigInteger('id', true);
-            $table->string('name');
-            $table->decimal('value', 10, 2);
+        Schema::create('user_roles', function (Blueprint $table) {
+            $table->bigInteger('user_id');
+            $table->integer('role_id');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('commissions');
+        Schema::dropIfExists('user_roles');
     }
 };

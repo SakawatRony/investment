@@ -12,17 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('full_name');
-            $table->string('user_name')->unique();
+            $table->bigInteger('id', true);
+            $table->string('full_name')->index();
+            $table->string('user_name')->index()->unique();
             $table->string('phone');
             $table->string('nid');
             $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('status',12);
-            $table->string('verification_code');
-            $table->bool('is_verified');
+            $table->string('verification_code')->nullable();;
+            $table->boolean('is_verified');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });

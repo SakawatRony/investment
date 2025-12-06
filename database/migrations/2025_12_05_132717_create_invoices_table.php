@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigInteger('id', true);
+            $table->string('unit_name');
+            $table->decimal('price', 10, 2)->nullable();
+            $table->decimal('commission', 10, 2)->nullable();
+            $table->text('params')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });
     }
 

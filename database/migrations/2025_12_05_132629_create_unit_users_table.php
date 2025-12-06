@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('unit_users', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigInteger('id', true);
+            $table->bigInteger('user_id')->index('users_user_id_foreign_idx');
+            $table->string('pin');
+            $table->text('params')->nullable();
+            $table->boolean('is_used')->default('0');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });
     }
 

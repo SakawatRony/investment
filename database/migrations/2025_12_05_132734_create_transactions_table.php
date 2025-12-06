@@ -12,8 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigInteger('id', true);
+            $table->bigInteger('user_id')->index('users_user_id_foreign_idx')->nullable();
+            $table->decimal('price', 10, 2)->nullable();
+            $table->bigInteger('unit_id')->index('units_unit_id_foreign_idx')->nullable();
+            $table->decimal('commission', 10, 2)->nullable();
+            $table->text('params')->nullable();
+            $table->string('type')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });
     }
 

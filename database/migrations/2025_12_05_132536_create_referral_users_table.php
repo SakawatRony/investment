@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('referral_users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigIncrements('user_id');
+            $table->bigInteger('id', true);
+            $table->bigInteger('user_id')->index('users_user_id_foreign_idx');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });
