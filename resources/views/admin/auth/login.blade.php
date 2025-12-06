@@ -40,17 +40,28 @@
       <div class="login-logo">
         <a href="#"><b>Login</b></a>
       </div>
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+     @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
       <!-- /.login-logo -->
       <div class="card">
         <div class="card-body login-card-body">
           <p class="login-box-msg">Sign in to start your session</p>
-          <form action="../index3.html" method="post">
+          <form action="{{ route('login.submit')}}" method="post">
+            @csrf
             <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="Email" />
-              <div class="input-group-text"><span class="bi bi-envelope"></span></div>
+              <input type="text" name="user_name_phone" required class="form-control" placeholder="User Name or Phone*" />
+              <div class="input-group-text"><span class="bi bi-info"></span></div>
             </div>
             <div class="input-group mb-3">
-              <input type="password" class="form-control" placeholder="Password" />
+              <input type="password" name="password" required class="form-control" placeholder="Password*" />
               <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
             </div>
             <!--begin::Row-->
@@ -74,7 +85,7 @@
           <!-- /.social-auth-links -->
           <p class="mb-1"><a href="forgot-password.html">I forgot my password</a></p>
           <p class="mb-0">
-            <a href="{{ route('registration')}}" class="text-center"> Register a new membership </a>
+            <a href="{{ route('signUp')}}" class="text-center"> Register a new membership </a>
           </p>
         </div>
         <!-- /.login-card-body -->

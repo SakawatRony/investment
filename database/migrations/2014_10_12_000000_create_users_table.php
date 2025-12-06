@@ -15,14 +15,14 @@ return new class extends Migration
             $table->bigInteger('id', true);
             $table->string('full_name')->index();
             $table->string('user_name')->index()->unique();
-            $table->string('phone');
+            $table->string('phone')->index()->unique();
             $table->string('nid')->nullable();
             $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('status',12);
             $table->string('verification_code')->nullable();;
-            $table->boolean('is_verified');
+            $table->boolean('is_verified')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });

@@ -32,11 +32,8 @@
     <!--begin::Required Plugin(AdminLTE)-->
      <link rel="stylesheet" href="{{ asset('public/css/adminlte.css') }}" />
     <!--end::Required Plugin(AdminLTE)-->
-    <style>
-        .login-box {
-                width: 550px;
-        }
-    </style>
+    <!--custom css-->
+     <link rel="stylesheet" href="{{ asset('public/css/custom/registration.css') }}" />
   </head>
   <!--end::Head-->
   <!--begin::Body-->
@@ -45,6 +42,15 @@
       <div class="login-logo">
         <a href="#"><b>Registration</b></a>
       </div>
+      @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+     @endif
       <!-- /.login-logo -->
       <div class="card">
         <div class="card-body login-card-body">
@@ -52,24 +58,24 @@
           <form action="{{ route('registration')}}" method="post" id="registration_form">
             @csrf
             <div class="input-group mb-3">
-              <input type="text" name="full_name" class="form-control" placeholder="Name*" />
+              <input type="text" name="full_name" value="{{ old('full_name')}}" class="form-control" placeholder="Name*" />
               <div class="input-group-text"><span class="bi bi-person"></span></div>
             </div>
             <div class="input-group mb-3">
-              <input type="text" name="user_name" class="form-control" placeholder="User Name*" />
+              <input type="text" name="user_name" value="{{ old('user_name')}}"  class="form-control" placeholder="User Name*" />
               <label id="user_name-error" class="error" for="user_name"></label>
               <div class="input-group-text"><span class="bi bi-info-circle"></span></div>
             </div>
              <div class="input-group mb-3">
-              <input type="text" name="phone" class="form-control" placeholder="Phone*" />
+              <input type="text" name="phone" value="{{ old('phone')}}" class="form-control" placeholder="Phone*" />
               <div class="input-group-text"><span class="bi bi-phone"></span></div>
             </div>
             <div class="input-group mb-3">
-              <input type="email" name="email" class="form-control" placeholder="Email" />
+              <input type="email" name="email" value="{{ old('email')}}" class="form-control" placeholder="Email" />
               <div class="input-group-text"><span class="bi bi-envelope"></span></div>
             </div>
             <div class="input-group mb-3">
-              <input type="text" name="nid" class="form-control" placeholder="NID" />
+              <input type="text" name="nid" value="{{ old('nid')}}" class="form-control" placeholder="NID" />
               <div class="input-group-text"><span class="bi bi-info"></span></div>
             </div>
             <div class="input-group mb-3">
@@ -77,7 +83,7 @@
               <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
             </div>
             <div class="input-group mb-3">
-              <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm Password" />
+              <input type="password" name="password_confirmation" id="confirm_password" class="form-control" placeholder="Confirm Password" />
               <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
             </div>
             <!--begin::Row-->
@@ -91,7 +97,7 @@
               <!-- /.col -->
               <div class="col-4">
                 <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-primary">Sign In</button>
+                  <button type="submit" class="btn btn-primary">Register</button>
                 </div>
               </div>
               <!-- /.col -->
@@ -146,53 +152,7 @@
         }
       });
     </script>
-    <script>
-        $(document).ready(function() {
-        $("#registration_form").validate({
-            rules: {
-        full_name: {
-            required: true,
-            minlength: 2
-        },
-        user_name: {
-            required: true,
-            minlength: 4
-        },
-        phone: {
-            required: true,
-            minlength: 9
-        },
-        password: {
-            required: true,
-            minlength: 4
-        },
-        confirm_password: {
-            required: true,
-            equalTo: "#password" // Matches the password field by ID
-        }
-    },
-    messages: {
-         full_name: {
-            required: "Please enter your full name",
-            minlength: "Your full name must consist of at least 2 characters"
-        },
-        user_name: {
-            required: "Please enter a username",
-            minlength: "Your username must consist of at least 4 characters"
-        },
-        email: "Please enter a valid email address",
-        password: {
-            required: "Please provide a password",
-            minlength: "Your password must be at least 8 characters long"
-        },
-        confirm_password: {
-            required: "Please confirm your password",
-            equalTo: "Please enter the same password as above"
-        }
-    }
-        });
-    });
-    </script>
+    <script src="{{ asset('public/js/custom/registration.js')}}"></script>
     <!--end::OverlayScrollbars Configure-->
     <!--end::Script-->
   </body>
