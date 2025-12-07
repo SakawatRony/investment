@@ -20,4 +20,8 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 //Route::match(['get', 'post'], '/registration', [LoginController::class, 'register'])->name('registration');
 Route::get( '/registration', [LoginController::class, 'signUp'])->name('signUp');
 Route::post( '/registration', [LoginController::class, 'register'])->name('registration');
-Route::get('/dashboard', [DashboardController::class, 'index']);
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});

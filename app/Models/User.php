@@ -46,6 +46,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
+
     protected function password(): Attribute
     {
     return Attribute::make(
@@ -53,5 +58,5 @@ class User extends Authenticatable
             'password' => \Hash::make($value),
         ],
     );
-  }
+    }
 }

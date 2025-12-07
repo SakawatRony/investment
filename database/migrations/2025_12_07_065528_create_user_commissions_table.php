@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('commissions', function (Blueprint $table) {
+        Schema::create('user_commissions', function (Blueprint $table) {
             $table->bigInteger('id', true);
-            $table->string('name');
-            $table->string('slug');
-            $table->decimal('value', 10, 2);
+            $table->bigInteger('to_user_id')->index('users_to_user_id_foreign_idx');
+            $table->bigInteger('from_user_id')->index('users_from_user_id_foreign_idx');
+            $table->decimal('commission', 10, 2);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('commissions');
+        Schema::dropIfExists('user_commissions');
     }
 };
