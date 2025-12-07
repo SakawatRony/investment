@@ -13,7 +13,7 @@ class LoginController extends Controller
     public function index()
     {
         if(Auth::check()) {
-            return redirect()->intended(route('dashboard'));
+            return redirect()->intended(route('admin.dashboard'));
         }
 
         return view('admin.auth.login');
@@ -21,14 +21,19 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $user = User::where('user_name', $request->user_name_phone)->orWhere('phone', $request->user_name_phone)->where('status', 'active')->first();
+        $user = User::where('user_name', $request->user_name_phone)->orWhere('phone', $request->user_name_phone)->first();
+
+        if(!empty($user) && $user->status != 'active') {
+            return redirect()->back()->with('error', 'Inactive user!');
+        }
 
         $request['user_name'] = $request->user_name_phone;
         $request['phone'] = $request->user_name_phone;
         $credentials1 = $request->only('user_name', 'password');
         $credentials2 = $request->only('phone', 'password');
+
         if (Auth::guard('user')->attempt($credentials1) || Auth::guard('user')->attempt($credentials2)) {
-            return redirect()->intended(route('dashboard'));
+            return redirect()->intended(route('admin.dashboard'));
         }
 
         return redirect()->back()->with('error', 'Invalid credentials');
@@ -36,10 +41,7 @@ class LoginController extends Controller
 
     public function signUp()
     {
-        if(Auth::check()) {
-            return redirect()->intended(route('dashboard'));
-        }
-
+        $this->authCheck();
         return view('admin.auth.registration');
     }
 
@@ -51,6 +53,13 @@ class LoginController extends Controller
             }
 
             return redirect()->back()->with('error', 'Something went wrong while updating your profile.');
+    }
+
+    public function authCheck()
+    {
+        if(Auth::check()) {
+            return redirect()->intended(route('admin.dashboard'));
+        }
     }
 
     public function logout(Request $request)

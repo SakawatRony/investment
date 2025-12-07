@@ -30,10 +30,16 @@
               id="navigation"
             >
               <li class="nav-item">
+                <a href="{{ route('admin.dashboard')}}" class="nav-link active">
+                  <i class="nav-icon bi bi-grip-horizontal"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
                   <p>
-                    Widgets
+                    User
                     <i class="nav-arrow bi bi-chevron-right"></i>
                   </p>
                 </a>
@@ -41,13 +47,13 @@
                   <li class="nav-item">
                     <a href="../widgets/small-box.html" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>Small Box</p>
+                      <p>Add User</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="../widgets/info-box.html" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>info Box</p>
+                      <p>Users</p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -57,14 +63,6 @@
                     </a>
                   </li>
                 </ul>
-              </li>
-
-
-              <li class="nav-item">
-                <a href="../docs/layout.html" class="nav-link active">
-                  <i class="nav-icon bi bi-grip-horizontal"></i>
-                  <p>Layout</p>
-                </a>
               </li>
             </ul>
             <!--end::Sidebar Menu-->

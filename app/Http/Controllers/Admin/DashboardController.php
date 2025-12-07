@@ -12,4 +12,9 @@ class DashboardController extends Controller
     {
         return view('admin.dashboard');
     }
+
+    public function changePassword()
+    {
+        return view('admin.change_password');
+    }
 }
