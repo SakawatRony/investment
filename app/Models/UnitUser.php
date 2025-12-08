@@ -7,5 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class UnitUser extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'pin',
+        'params',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
+    }
 }

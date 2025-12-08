@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\{ DashboardController, LoginController, UnitController, UserController};
+use App\Http\Controllers\Admin\{ DashboardController, LoginController, UnitController, UserController, UnitUserController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +34,7 @@ Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () 
     Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
     Route::post('/users/update/{id}', [UserController::class, 'update'])->name('users.update');
     Route::post('/users/destroy', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::get('/users/search', [UserController::class, 'search']);
 
     Route::get('/units', [UnitController::class, 'index'])->name('units');
     Route::get('/units/create', [UnitController::class, 'create'])->name('units.create');
@@ -41,4 +42,11 @@ Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () 
     Route::get('/units/edit/{id}', [UnitController::class, 'edit'])->name('units.edit');
     Route::post('/units/update/{id}', [UnitController::class, 'update'])->name('units.update');
     Route::post('/units/destroy', [UnitController::class, 'destroy'])->name('units.destroy');
+
+    Route::get('/units/user', [UnitUserController::class, 'index'])->name('units.user');
+    Route::get('/units/user/create', [UnitUserController::class, 'create'])->name('units.user.create');
+    Route::post('/units/user/store', [UnitUserController::class, 'store'])->name('units.user.store');
+    Route::get('/units/user/edit/{id}', [UnitUserController::class, 'edit'])->name('units.user.edit');
+    Route::post('/units/user/update/{id}', [UnitUserController::class, 'update'])->name('units.user.update');
+    Route::post('/units/user/destroy', [UnitUserController::class, 'destroy'])->name('units.user.destroy');
 });

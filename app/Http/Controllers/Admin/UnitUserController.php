@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\UserListDataTable;
+use App\DataTables\UnitUserListDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UnitUserController extends Controller
 {
-    public function index(UserListDataTable $dataTable)
+    public function index(UnitUserListDataTable $dataTable)
     {
-         return $dataTable->render('admin.users.index');
+         return $dataTable->render('admin.unit_user.index');
     }
 
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.unit_user.create');
     }
 
     public function store(UserRequest $request)
@@ -25,7 +23,7 @@ class UserController extends Controller
         $request['status'] = 'active';
 
             if(User::create($request->all())) {
-                return redirect()->route('admin.users')->with('success', 'User created successfully!');
+                return redirect()->route('admin.unit.users')->with('success', 'User created successfully!');
             }
 
             return redirect()->back()->with('error', 'Something went wrong! Try Again');
@@ -77,17 +75,5 @@ class UserController extends Controller
         return response()->json([
                 'status' => 0
             ]);
-    }
-
-    public function search(Request $request)
-    {
-        $search = $request->q;
-
-        $users = User::where('user_name', 'like', '%' . $search . '%')
-            ->select('id', 'user_name as text')
-            ->limit(15)
-            ->get();
-
-        return response()->json($users);
     }
 }

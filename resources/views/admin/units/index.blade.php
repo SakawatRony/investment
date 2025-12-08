@@ -31,25 +31,31 @@
 <div class="app-content">
     <div class="container-fluid">
     <div class="row">
+         <div class="col-md-4"></div>
+         <div class="col-md-4"></div>
+        <div class="col-md-4 d-flex justify-content-end mb-2">
+           <a class="btn btn-primary" href="{{ route('admin.units.create')}}">Add Unit</a>
+        </div>
+        <br>
         <div class="col-md-12">
             <div class="card card-primary">
             <!-- form start -->
             <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Remark</th>
-                    <th>Action</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Remark</th>
+                    <th class="text-center">Action</th>
                   </tr>
                   </thead>
                   <tbody>
                     @foreach ($units as $unit)
                     <tr>
-                    <td>{{ $unit->name }}</td>
-                    <td>{{ $unit->params }}</td>
-                    <td>
-                        <a data-bs-toggle="tooltip" title="Edit" href="#" class="btn btn-primary"><i class="bi bi-arrow-right-square"></i></a>
-                        <a data-bs-toggle="tooltip" title="Delete" href="javascript:void(0)" class="delete btn btn-danger"><i class="bi bi-archive-fill"></i></a>
+                    <td class="text-center">{{ $unit->name }}</td>
+                    <td class="text-center">{{ $unit->params }}</td>
+                    <td class="text-center">
+                        <a data-bs-toggle="tooltip" title="Edit" href="{{ route('admin.units.edit', $unit->id)}}" class="btn btn-primary"><i class="bi bi-arrow-right-square"></i></a>
+                        <a data-bs-toggle="tooltip" title="Delete" href="javascript:void(0)" class="delete btn btn-danger" data-id="{{ $unit->id }}" id="delete"><i class="bi bi-archive-fill"></i></a>
                     </td>
                   </tr>
                     @endforeach
@@ -70,23 +76,5 @@
 
 <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
-
-
-<script>
-  $(function () {
-    let table = $("#example1").DataTable({
-        responsive: true,
-        lengthChange: false,
-        autoWidth: false,
-        paging: true,
-        searching: true, // চাইলে true/false
-        ordering: true,
-        info: true,
-        buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    });
-
-    table.buttons().container()
-        .appendTo('#example1_wrapper .col-md-6:eq(0)');
-});
-</script>
+<script src="{{ asset('public/js/custom/unit.js')}}"></script>
 @endsection

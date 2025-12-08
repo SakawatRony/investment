@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <label for="param">Remarks</label>
-                    <textarea class="form-control" name="param" rows="3" placeholder="Enter ..." autocomplete="off" spellcheck="false"></textarea>
+                    <textarea class="form-control" name="params" rows="3" placeholder="Enter ..." autocomplete="off" spellcheck="false"></textarea>
                 </div>
                 </div>
                 <!-- /.card-body -->
