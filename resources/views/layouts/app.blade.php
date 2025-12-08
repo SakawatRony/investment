@@ -41,8 +41,11 @@
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="{{ asset('public/css/adminlte.css') }}" />
+     <link rel="stylesheet" href="{{ asset('public/css/custom/registration.css') }}" />
     <!--end::Required Plugin(AdminLTE)-->
     @yield('css')
+    <script src="{{ asset('public/js/jquery3.min.js')}}"></script>
+    <script src="{{ asset('public/js/jquery_validation.min.js')}}"></script>
   </head>
   <!--end::Head-->
   <!--begin::Body-->
@@ -56,7 +59,23 @@
       @include('layouts.sidebar')
       <!--end::Sidebar-->
       <!--begin::App Main-->
-      @yield('content')
+      <main class="app-main">
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        @yield('content')
+      </main>
       <!--end::App Main-->
       <!--begin::Footer-->
       @include('layouts.footer')
@@ -102,8 +121,6 @@
         }
       });
     </script>
-    <script src="{{ asset('public/js/jquery.min.js')}}" crossorigin="anonymous"
-    ></script>
      @yield('js')
     <!--end::OverlayScrollbars Configure-->
     <!--end::Script-->

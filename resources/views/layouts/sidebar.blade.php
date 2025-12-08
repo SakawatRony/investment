@@ -2,16 +2,9 @@
         <!--begin::Sidebar Brand-->
         <div class="sidebar-brand">
           <!--begin::Brand Link-->
-          <a href="../index.html" class="brand-link">
-            <!--begin::Brand Image-->
-            <img
-              src="../assets/img/AdminLTELogo.png"
-              alt="AdminLTE Logo"
-              class="brand-image opacity-75 shadow"
-            />
-            <!--end::Brand Image-->
+          <a href="{{ route('admin.dashboard')}}" class="brand-link">
             <!--begin::Brand Text-->
-            <span class="brand-text fw-light">AdminLTE 4</span>
+            <span class="brand-text fw-light">Welcome to the User</span>
             <!--end::Brand Text-->
           </a>
           <!--end::Brand Link-->
@@ -51,7 +44,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="../widgets/info-box.html" class="nav-link">
+                    <a href="{{ route('admin.users')}}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Users</p>
                     </a>

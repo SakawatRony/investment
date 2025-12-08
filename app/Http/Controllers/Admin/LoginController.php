@@ -48,11 +48,12 @@ class LoginController extends Controller
     public function register(UserRequest $request)
     {
             $request['status'] = 'active';
+
             if(User::create($request->all())) {
                 return redirect()->route('login')->with('success', 'User created successfully!');
             }
 
-            return redirect()->back()->with('error', 'Something went wrong while updating your profile.');
+            return redirect()->back()->with('error', 'Something went wrong! Try Again');
     }
 
     public function authCheck()

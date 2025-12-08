@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
                 'phone' => '01758376773',
                 'nid' => 123,
                 'email' => null,
-                'password' => '$2y$10$AkkNfWst7s8ZzCg2imU9X.hM0sVSOA/2KHMSiMUy473QUJKARjq9G',
+                'password' => '$2y$12$k8PKDyoVdO.jjeXinXBq7OSAf8lQwL.qKZ4LICX02ZKQSCB26tcJW',
                 'status' => 'active',
                 'is_verified' => 1,
             ],

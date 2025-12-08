@@ -18,7 +18,7 @@ $(document).ready(function() {
             required: true,
             minlength: 4
         },
-        confirm_password: {
+        password_confirmation: {
             required: true,
             equalTo: "#password" // Matches the password field by ID
         }
@@ -37,7 +37,7 @@ $(document).ready(function() {
             required: "Please provide a password",
             minlength: "Your password must be at least 8 characters long"
         },
-        confirm_password: {
+        password_confirmation: {
             required: "Please confirm your password",
             equalTo: "Please enter the same password as above"
         }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,13 @@ Route::post( '/registration', [LoginController::class, 'register'])->name('regis
 
 Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-     Route::get('/change-password', [DashboardController::class, 'changePassword'])->name('change.password');
+
+    Route::get('/change-password', [DashboardController::class, 'changePassword'])->name('change.password');
+    Route::post('/change-password', [DashboardController::class, 'changePasswordSubmit'])->name('change.password.submit');
+
+    Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+    Route::get('/users/destroy/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 });
