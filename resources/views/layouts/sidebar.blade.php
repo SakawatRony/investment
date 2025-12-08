@@ -38,7 +38,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="../widgets/small-box.html" class="nav-link">
+                    <a href="{{ route('admin.users.create')}}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Add User</p>
                     </a>
@@ -49,10 +49,33 @@
                       <p>Users</p>
                     </a>
                   </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon bi bi-box-seam-fill"></i>
+                  <p>
+                    Units
+                    <i class="nav-arrow bi bi-chevron-right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="../widgets/cards.html" class="nav-link">
+                    <a href="{{ route('admin.units.create')}}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>Cards</p>
+                      <p>Add Unit</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('admin.units')}}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>Unit</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>Unit Users</p>
                     </a>
                   </li>
                 </ul>

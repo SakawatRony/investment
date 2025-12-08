@@ -65,6 +65,11 @@
             {{ session('success') }}
         </div>
         @endif
+        @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -100,6 +105,7 @@
     ></script>
     <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
     <script src="{{ asset('public/js/adminlte.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     <script>
       const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
@@ -120,6 +126,10 @@
           });
         }
       });
+    </script>
+    <script>
+        var SITE_URL = "{{ URL::to('/admin') }}";
+        var token  = '{!! csrf_token() !!}';
     </script>
      @yield('js')
     <!--end::OverlayScrollbars Configure-->

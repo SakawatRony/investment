@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\User;
+use App\Models\Unit;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Http\JsonResponse;
 
-class UserListDataTable extends DataTable
+class UnitListDataTable extends DataTable
 {
     /*
     * DataTable Ajax
@@ -45,8 +45,8 @@ class UserListDataTable extends DataTable
     */
     public function query()
     {
-        $users = User::get();
-        return $this->applyScopes($users);
+        $units= Unit::get();
+        return $this->applyScopes($units);
     }
 
     /*
