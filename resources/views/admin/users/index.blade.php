@@ -40,6 +40,9 @@
 @endsection
 
 @section('js')
-<script src="{{ asset('public/js/custom/user_list.js')}}"></script>
-
+<script>
+    var ajax = true;
+    var url = '{{ route('admin.users.destroy') }}'
+</script>
+<script src="{{ asset('public/js/custom/custom_function.js')}}"></script>
 @endsection

@@ -12,12 +12,14 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
+        $data['sidebar'] = 'dashboard';
+        return view('admin.dashboard', $data);
     }
 
     public function changePassword()
     {
-        return view('admin.change_password');
+        $data['sidebar'] = 'dashboard';
+        return view('admin.change_password', $data);
     }
 
     public function changePasswordSubmit(ChangePasswordRequest $request)

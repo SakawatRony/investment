@@ -12,12 +12,16 @@ class UserController extends Controller
 {
     public function index(UserListDataTable $dataTable)
     {
-         return $dataTable->render('admin.users.index');
+         $data['sidebar'] = 'user';
+         $data['sidebar_sub'] = 'users';
+         return $dataTable->render('admin.users.index', $data);
     }
 
     public function create()
     {
-        return view('admin.users.create');
+        $data['sidebar'] = 'user';
+        $data['sidebar_sub'] = 'users_create';
+        return view('admin.users.create', $data);
     }
 
     public function store(UserRequest $request)
@@ -25,10 +29,10 @@ class UserController extends Controller
         $request['status'] = 'active';
 
             if(User::create($request->all())) {
-                return redirect()->route('admin.users')->with('success', 'User created successfully!');
+                return redirect()->route('admin.users')->with('success', actionMessage());
             }
 
-            return redirect()->back()->with('error', 'Something went wrong! Try Again');
+            return redirect()->back()->with('error', actionMessage('error'));
 
     }
 
@@ -37,11 +41,13 @@ class UserController extends Controller
         $user = User::where('id', $id)->first();
 
         if (!empty($user)) {
+            $data['sidebar'] = 'user';
+            $data['sidebar_sub'] = 'users';
             $data['user'] = $user;
             return view('admin.users.edit', $data);
         }
 
-        return redirect()->back()->with('error', 'User not found!');
+        return redirect()->back()->with('error', actionMessage('notFound'));
     }
 
     public function update(Request $request, $id)
@@ -55,10 +61,10 @@ class UserController extends Controller
             $user->status = $request->status;
             $user->save();
 
-            return redirect()->route('admin.users')->with('success', 'User updated successfully!');
+            return redirect()->route('admin.users')->with('success', actionMessage('update'));
         }
 
-        return redirect()->back()->with('error', 'Something went wrong!');
+        return redirect()->back()->with('error', actionMessage('error'));
 
     }
 
@@ -70,12 +76,14 @@ class UserController extends Controller
             $user->delete();
 
             return response()->json([
-                'status' => 1
+                'status' => 1,
+                'message' => actionMessage('delete')
             ]);
         }
 
         return response()->json([
-                'status' => 0
+                'status' => 0,
+                'message' => actionMessage('error')
             ]);
     }
 
@@ -84,6 +92,8 @@ class UserController extends Controller
         $search = $request->q;
 
         $users = User::where('user_name', 'like', '%' . $search . '%')
+            ->notId()
+            ->active()
             ->select('id', 'user_name as text')
             ->limit(15)
             ->get();

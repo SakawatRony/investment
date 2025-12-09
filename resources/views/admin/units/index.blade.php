@@ -76,5 +76,9 @@
 
 <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
-<script src="{{ asset('public/js/custom/unit.js')}}"></script>
+<script>
+    var url = '{{ route('admin.units.destroy') }}'
+    var ajax = false;
+</script>
+<script src="{{ asset('public/js/custom/custom_function.js')}}"></script>
 @endsection

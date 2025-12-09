@@ -1,7 +1,19 @@
 'use strict'
-$(document).on('click', '.delete', function (e) {
 
-        var userId = $(this).attr('data-id');
+ $(function () {
+    let table = $("#example1").DataTable({
+        responsive: true,
+        lengthChange: false,
+        autoWidth: false,
+        paging: true,
+        searching: true, // চাইলে true/false
+        ordering: true,
+        info: true,
+    });
+});
+
+$(document).on('click', '.delete', function (e) {
+        var id = $(this).attr('data-id');
         let table = $('#dataTableBuilder').DataTable();
         Swal.fire({
         title: "Are you sure?",
@@ -15,10 +27,10 @@ $(document).on('click', '.delete', function (e) {
         if (result.isConfirmed) {
 
             $.ajax({
-            url: SITE_URL + "/users/destroy",
+            url: url,
             // data that will be sent
             data: {
-                id: userId,
+                id: id,
                 "_token": token
             },
             type: 'POST',
@@ -27,14 +39,18 @@ $(document).on('click', '.delete', function (e) {
                 if(data.status == '1') {
                     Swal.fire({
                     title: "Deleted!",
-                    text: "Your Data has been deleted.",
+                    text: data.message,
                     icon: "success"
                     });
-                    table.ajax.reload(null, false);
+                    if (ajax == true) {
+                       table.ajax.reload(null, false);
+                    } else {
+                        location.reload();
+                    }
                 } else {
                     Swal.fire({
                     title: "Opps!",
-                    text: "Something went wrong!",
+                    text: data.message,
                     icon: "error"
                     });
                 }

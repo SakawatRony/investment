@@ -27,7 +27,10 @@ class UserListDataTable extends DataTable
 
                 $str = '';
                 $str .= $edit;
-                $str .= '<a data-bs-toggle="tooltip" title="Delete" href="javascript:void(0)" class="delete btn btn-danger" data-id="'.$users->id.'" data-toggle="modal" data-target="#delete_modal"><i class="bi bi-archive-fill"></i></a>';
+
+                if(auth()->user()->id != $users->id) {
+                    $str .= '<a data-bs-toggle="tooltip" title="Delete" href="javascript:void(0)" class="delete btn btn-danger" data-id="'.$users->id.'" data-toggle="modal" data-target="#delete_modal"><i class="bi bi-archive-fill"></i></a>';
+                }
 
                 return $str;
             })
@@ -45,7 +48,7 @@ class UserListDataTable extends DataTable
     */
     public function query()
     {
-        $users = User::get();
+        $users = User::notId()->get();
         return $this->applyScopes($users);
     }
 

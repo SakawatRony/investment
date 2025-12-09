@@ -4,76 +4,64 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\UnitUserListDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UnitUserRequest;
+use App\Models\Unit;
+use App\Models\UnitUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UnitUserController extends Controller
 {
     public function index(UnitUserListDataTable $dataTable)
     {
-         return $dataTable->render('admin.unit_user.index');
+         $data['sidebar'] = 'unit';
+         $data['sidebar_sub'] = 'unit_users';
+         return $dataTable->render('admin.unit_user.index', $data);
     }
 
     public function create()
     {
-        return view('admin.unit_user.create');
+        $data['sidebar'] = 'unit';
+        $data['sidebar_sub'] = 'unit_users';
+        $data['units'] = Unit::get();
+        return view('admin.unit_user.create', $data);
     }
 
-    public function store(UserRequest $request)
+    public function store(UnitUserRequest $request)
     {
-        $request['status'] = 'active';
+        $count = 0;
+        for($i = 1; $i <= $request->total_number; $i++) {
 
-            if(User::create($request->all())) {
-                return redirect()->route('admin.unit.users')->with('success', 'User created successfully!');
-            }
+            $pin = Str::random(6);
 
-            return redirect()->back()->with('error', 'Something went wrong! Try Again');
+            do {
+                $pin = Str::random(6);
+            } while (UnitUser::where('pin', $pin)->exists());
 
-    }
+            $request['pin'] = $pin;
 
-    public function edit($id)
-    {
-        $user = User::where('id', $id)->first();
-
-        if (!empty($user)) {
-            $data['user'] = $user;
-            return view('admin.users.edit', $data);
+            UnitUser::create($request->all());
         }
 
-        return redirect()->back()->with('error', 'User not found!');
-    }
-
-    public function update(Request $request, $id)
-    {
-        $user = User::where('id', $id)->first();
-
-        if (!empty($user)) {
-            $user->full_name = $request->full_name;
-            $user->email = $request->email;
-            $user->nid = $request->nid;
-            $user->status = $request->status;
-            $user->save();
-
-            return redirect()->route('admin.users')->with('success', 'User updated successfully!');
-        }
-
-        return redirect()->back()->with('error', 'Something went wrong!');
-
+        return redirect()->route('admin.units.user')->with('success', actionMessage('success'));
     }
 
     public function destroy(Request $request)
     {
-        $user = User::where('id', $request->id)->first();
+        $unitUser = UnitUser::where('id', $request->id)->first();
 
-        if(!empty($user)) {
-            $user->delete();
+        if(!empty($unitUser) && $unitUser->is_used == 0) {
+            $unitUser->delete();
 
             return response()->json([
-                'status' => 1
+                'status' => 1,
+                'message' => actionMessage('delete'),
             ]);
         }
 
         return response()->json([
-                'status' => 0
+                'status' => 0,
+                'message' => actionMessage('error'),
             ]);
     }
 }

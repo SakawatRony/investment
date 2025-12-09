@@ -17,3 +17,14 @@ $('#user_id').select2({
         }
     }
 });
+
+document.getElementById('total_number').addEventListener('input', function () {
+    let v = this.value;
+    // remove decimal
+    if (v.includes('.')) v = v.split('.')[0];
+    // remove leading zero
+    v = v.replace(/^0+/, '');
+    // enforce positive
+    if (v === '' || Number(v) < 1) v = '';
+    this.value = v;
+});

@@ -37,12 +37,21 @@
                     <div class="form-group">
                         <label for="user_id">User Name*</label>
                         <select class="form-control select2 p-3" name="user_id" id="user_id" required>
-                            <option value="">{{ __('Select One')  }}</option>
+                            <option value="">Select One</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="user_name">Total Number*</label>
-                        <input type="text" class="form-control" id="user_name" name="user_name" value="{{ old('full_name')}}" placeholder="User Name">
+                        <label for="user_id">Unit*</label>
+                        <select class="form-control" name="unit_id" id="unit_id" required>
+                            <option value="">Select Unit</option>
+                            @foreach ($units as $unit)
+                            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="total_number">Total Number*</label>
+                        <input type="number" min="1" step="1" class="form-control" id="total_number" required name="total_number" value="{{ old('total_number')}}" placeholder="Total Number">
                     </div>
                 </div>
                 <!-- /.card-body -->

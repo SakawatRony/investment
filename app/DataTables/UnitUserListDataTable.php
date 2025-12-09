@@ -21,16 +21,21 @@ class UnitUserListDataTable extends DataTable
            ->addColumn('user', function ($units) {
                 return $units->user?->full_name;
             })
+            ->addColumn('unit', function ($units) {
+                return $units->unit?->name;
+            })
             ->addColumn('is_used', function ($units) {
                 return $units->is_used == 1 ? 'Used' : 'Not Used';
             })
             ->addColumn('action', function ($units) {
 
-                $edit = '<a data-bs-toggle="tooltip" title="Edit" href="' . route('admin.users.edit', ['id' => $units->id]) . '" class="btn btn-primary"><i class="bi bi-arrow-right-square"></i></a>';
-
                 $str = '';
-                $str .= $edit;
-                $str .= '<a data-bs-toggle="tooltip" title="Delete" href="javascript:void(0)" class="delete btn btn-danger" data-id="'.$units->id.'" data-toggle="modal" data-target="#delete_modal"><i class="bi bi-archive-fill"></i></a>';
+
+                if($units->is_used != 1) {
+                    $str .= '<a data-bs-toggle="tooltip" title="Delete" href="javascript:void(0)" class="delete btn btn-danger" data-id="'.$units->id.'" data-toggle="modal" data-target="#delete_modal"><i class="bi bi-archive-fill"></i></a>';
+                } else {
+                    $str = 'N/A';
+                }
 
                 return $str;
             })
@@ -62,6 +67,7 @@ class UnitUserListDataTable extends DataTable
         return $this->builder()
             ->addColumn(['data' => 'id', 'name' => 'id', 'title' => 'Id', 'visible' => false])
             ->addColumn(['data' => 'user', 'name' => 'user', 'title' => 'User'])
+            ->addColumn(['data' => 'unit', 'name' => 'unit', 'title' => 'Unit'])
             ->addColumn(['data' => 'pin', 'name' => 'pin', 'title' => 'Pin'])
             ->addColumn(['data' => 'is_used', 'name' => 'is_used', 'title' => 'Is Used'])
             ->addColumn(['data' => 'created_at', 'name' => 'created_at', 'title' => __('Created')])

@@ -23,13 +23,13 @@
               id="navigation"
             >
               <li class="nav-item">
-                <a href="{{ route('admin.dashboard')}}" class="nav-link active">
+                <a href="{{ route('admin.dashboard')}}" class="nav-link {{ isset($sidebar) && $sidebar == 'dashboard' ? 'active' : null }}">
                   <i class="nav-icon bi bi-grip-horizontal"></i>
                   <p>Dashboard</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
+              <li class="nav-item {{ isset($sidebar) && $sidebar == 'user' ? 'menu-open' : null }}">
+                <a href="#" class="nav-link {{ isset($sidebar) && $sidebar == 'user' ? 'active' : null }}">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
                   <p>
                     User
@@ -38,21 +38,21 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ route('admin.users.create')}}" class="nav-link">
+                    <a href="{{ route('admin.users.create')}}" class="nav-link {{ isset($sidebar) && isset($sidebar_sub) && $sidebar == 'user' && $sidebar_sub == 'users_create' ? 'active' : null }}">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Add User</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('admin.users')}}" class="nav-link">
+                    <a href="{{ route('admin.users')}}" class="nav-link {{ isset($sidebar) && isset($sidebar_sub) && $sidebar == 'user' && $sidebar_sub == 'users' ? 'active' : null }}">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Users</p>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
+              <li class="nav-item {{ isset($sidebar) && $sidebar == 'unit' ? 'menu-open' : null }}">
+                <a href="#" class="nav-link {{ isset($sidebar) && $sidebar == 'unit' ? 'active' : null }}">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
                   <p>
                     Units
@@ -61,19 +61,19 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ route('admin.units.create')}}" class="nav-link">
+                    <a href="{{ route('admin.units.create')}}" class="nav-link {{ isset($sidebar) && isset($sidebar_sub) && $sidebar == 'unit' && $sidebar_sub == 'unit_create' ? 'active' : null }}">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Add Unit</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('admin.units')}}" class="nav-link">
+                    <a href="{{ route('admin.units')}}" class="nav-link {{ isset($sidebar) && isset($sidebar_sub) && $sidebar == 'unit' && $sidebar_sub == 'units' ? 'active' : null }}">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Unit</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('admin.units.user')}}" class="nav-link">
+                    <a href="{{ route('admin.units.user')}}" class="nav-link {{ isset($sidebar) && isset($sidebar_sub) && $sidebar == 'unit' && $sidebar_sub == 'unit_users' ? 'active' : null }}">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Unit Users</p>
                     </a>

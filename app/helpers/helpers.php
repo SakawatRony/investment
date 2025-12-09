@@ -75,3 +75,17 @@ function timeZonegetTime($date)
     $time = $myDateTime->format('h:i A');
     return $time;
 }
+
+function actionMessage($data='success', $custom = '')
+{
+    $message = [
+        'success' => $custom.' Created Successfully.',
+        'delete' => $custom.' Deleted Successfully.',
+        'failCustom' => $custom.' Can not be deleted. It has been records.',
+        'error' => 'Something went wrong!Try again.',
+        'notFound' => $custom.' Not found.',
+        'update' => $custom.' Updated Successfully.',
+    ];
+
+    return $message[$data];
+}

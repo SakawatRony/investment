@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $query->where('status', 'active');
     }
 
+    public function scopeNotId($query)
+    {
+        return $query->where('id','!=', '1');
+    }
+
     protected function password(): Attribute
     {
     return Attribute::make(

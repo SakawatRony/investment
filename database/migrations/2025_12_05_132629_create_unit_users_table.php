@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('unit_users', function (Blueprint $table) {
             $table->bigInteger('id', true);
             $table->bigInteger('user_id')->index('users_user_id_foreign_idx');
+            $table->bigInteger('unit_id')->index('units_unit_id_foreign_idx');
             $table->string('pin');
             $table->text('params')->nullable();
             $table->boolean('is_used')->default('0');
