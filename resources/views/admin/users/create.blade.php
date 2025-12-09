@@ -61,6 +61,15 @@
                     <input type="password" class="form-control" id="password" name="password_confirmation" placeholder="Password Confirmation">
                 </div>
                 <div class="form-group">
+                    <label for="role_id">Role</label>
+                    <select name="role_id" class="form-control" required>
+                        <option value="">Select Role</option>
+                        @foreach ($roles as $role)
+                        <option value="{{ $role->id }}" @selected(old('role_id') == $role->id)>{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="statis">Status</label>
                     <select name="status" class="form-control">
                         <option value="active" @selected(old('status') == 'active') >Active</option>

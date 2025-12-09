@@ -51,6 +51,11 @@
             </ul>
         </div>
      @endif
+     @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
       <!-- /.login-logo -->
       <div class="card">
         <div class="card-body login-card-body">
@@ -65,6 +70,10 @@
               <input type="text" name="user_name" value="{{ old('user_name')}}"  class="form-control" placeholder="User Name*" />
               <label id="user_name-error" class="error" for="user_name"></label>
               <div class="input-group-text"><span class="bi bi-info-circle"></span></div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" name="pin" id="pin" required value="{{ old('pin')}}" class="form-control" placeholder="Enter your PIN*" />
+              <div class="input-group-text"><span class="bi bi-phone"></span></div>
             </div>
              <div class="input-group mb-3">
               <input type="text" name="phone" value="{{ old('phone')}}" class="form-control" placeholder="Phone*" />
@@ -89,10 +98,10 @@
             <!--begin::Row-->
             <div class="row">
               <div class="col-8">
-                <div class="form-check">
+                {{-- <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                   <label class="form-check-label" for="flexCheckDefault"> I agree to the <a href="#">terms</a> </label>
-                </div>
+                </div> --}}
               </div>
               <!-- /.col -->
               <div class="col-4">

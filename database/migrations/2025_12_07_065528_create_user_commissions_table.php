@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigInteger('id', true);
             $table->bigInteger('to_user_id')->index('users_to_user_id_foreign_idx');
             $table->bigInteger('from_user_id')->index('users_from_user_id_foreign_idx');
+            $table->bigInteger('from_refer_user_id')->nullable()->index('users_from_from_refer_user_id_foreign_idx');
             $table->decimal('commission', 10, 2);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();

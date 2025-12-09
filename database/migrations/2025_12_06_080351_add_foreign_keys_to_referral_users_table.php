@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('referral_users', function (Blueprint $table) {
             $table->foreign(['user_id'])->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign(['referral_id'])->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -23,6 +24,7 @@ return new class extends Migration
     {
         Schema::table('referral_users', function (Blueprint $table) {
             $table->dropForeign('users_user_id_foreign_idx');
+            $table->dropForeign('users_referral_id_foreign_idx');
         });
     }
 };

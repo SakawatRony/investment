@@ -47,4 +47,7 @@ Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () 
     Route::get('/units/user/create', [UnitUserController::class, 'create'])->name('units.user.create');
     Route::post('/units/user/store', [UnitUserController::class, 'store'])->name('units.user.store');
     Route::post('/units/user/destroy', [UnitUserController::class, 'destroy'])->name('units.user.destroy');
+
+    Route::get('/user/commission/{id}', [UserController::class, 'commission'])->name('user.commissions');
+    Route::get('/user/referral-user/{id}', [UserController::class, 'referralUser'])->name('user.referralUsers');
 });

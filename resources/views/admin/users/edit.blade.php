@@ -41,6 +41,15 @@
                     <input type="email" class="form-control" id="email" name="email" value="{{ $user->email}}" placeholder="Email">
                 </div>
                 <div class="form-group">
+                    <label for="role_id">Role</label>
+                    <select name="role_id" class="form-control" required>
+                        <option value="">Select Role</option>
+                        @foreach ($roles as $role)
+                        <option value="{{ $role->id }}" @selected($user->roleUser?->role_id == $role->id)>{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="confirm_password">NID</label>
                     <input type="text" class="form-control" id="nid" name="nid" value="{{ $user->nid}}" placeholder="NID">
                 </div>

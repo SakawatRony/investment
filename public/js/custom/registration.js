@@ -10,6 +10,9 @@ $(document).ready(function() {
             required: true,
             minlength: 4
         },
+        pin: {
+            required: true
+        },
         phone: {
             required: true,
             minlength: 9
@@ -33,6 +36,7 @@ $(document).ready(function() {
             minlength: "Your username must consist of at least 4 characters"
         },
         email: "Please enter a valid email address",
+        pin: "Please enter a valid pin",
         password: {
             required: "Please provide a password",
             minlength: "Your password must be at least 8 characters long"

@@ -21,6 +21,12 @@ class UserListDataTable extends DataTable
            ->editColumn('status', function ($users) {
                 return $users->status;
             })
+            ->editColumn('role', function ($users) {
+                return $users->roleUser?->role?->name;
+            })
+            ->editColumn('user_name', function ($users) {
+                return ''.$users->user_name.'<br><a href="'.route('admin.user.commissions', $users->id).'">Commission</a> | <a href="'.route('admin.user.referralUsers', $users->id).'">Referral User</a>';
+            })
             ->addColumn('action', function ($users) {
 
                 $edit = '<a data-bs-toggle="tooltip" title="Edit" href="' . route('admin.users.edit', ['id' => $users->id]) . '" class="btn btn-primary"><i class="bi bi-arrow-right-square"></i></a>';
@@ -37,7 +43,7 @@ class UserListDataTable extends DataTable
             ->addColumn('created_at', function ($users) {
                 return timeZoneformatDate($users->created_at) .'<br>'. timeZonegetTime($users->created_at);
             })
-            ->rawColumns(['id', 'full_name', 'user_name', 'phone', 'email', 'nid', 'status', 'action', 'created_at'])
+            ->rawColumns(['id', 'full_name', 'user_name', 'phone', 'email', 'nid', 'status', 'role', 'action', 'created_at'])
             ->make(true);
     }
 
@@ -64,12 +70,13 @@ class UserListDataTable extends DataTable
             ->addColumn(['data' => 'full_name', 'name' => 'full_name', 'title' => 'Full Name'])
             ->addColumn(['data' => 'user_name', 'name' => 'user_name', 'title' => 'User Name'])
             ->addColumn(['data' => 'phone', 'name' => 'phone', 'title' => 'Phone'])
+            ->addColumn(['data' => 'role', 'name' => 'role', 'title' => 'Role'])
             ->addColumn(['data' => 'email', 'name' => 'email', 'title' => __('Email')])
             ->addColumn(['data' => 'nid', 'name' => 'nid', 'title' => __('NID'), 'orderable' => false])
             ->addColumn(['data' => 'status', 'name' => 'status', 'title' => __('Status')])
             ->addColumn(['data' => 'created_at', 'name' => 'created_at', 'title' => __('Created')])
             ->addColumn([
-                'data' => 'action', 'name' => 'action', 'title' => '', 'width' => '12%',
+                'data' => 'action', 'name' => 'action', 'title' => 'Action', 'width' => '12%',
                 'visible' => true,
                 'orderable' => false, 'searchable' => false, 'className' => 'text-right align-center',
             ])

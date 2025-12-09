@@ -56,6 +56,11 @@ class User extends Authenticatable
         return $query->where('id','!=', '1');
     }
 
+    public function roleUser()
+    {
+        return $this->hasOne(UserRole::class);
+    }
+
     protected function password(): Attribute
     {
     return Attribute::make(

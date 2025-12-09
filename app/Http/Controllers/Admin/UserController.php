@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\ReferUsersDataTable;
+use App\DataTables\UserCommissionDataTable;
 use App\DataTables\UserListDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Models\Role;
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
+use DB;
 
 class UserController extends Controller
 {
@@ -21,18 +26,29 @@ class UserController extends Controller
     {
         $data['sidebar'] = 'user';
         $data['sidebar_sub'] = 'users_create';
+        $data['roles'] = Role::notId()->get();
         return view('admin.users.create', $data);
     }
 
     public function store(UserRequest $request)
     {
-        $request['status'] = 'active';
+        try {
+              DB::beginTransaction();
+             $user = User::create($request->all());
 
-            if(User::create($request->all())) {
-                return redirect()->route('admin.users')->with('success', actionMessage());
-            }
+        if(!empty($user)) {
 
-            return redirect()->back()->with('error', actionMessage('error'));
+            $request['user_id'] = $user->id;
+            $useRole = UserRole::create($request->only('user_id', 'role_id'));
+             DB::commit();
+            return redirect()->route('admin.users')->with('success', actionMessage());
+        }
+         } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        return redirect()->back()->with('error', actionMessage('error'));
 
     }
 
@@ -44,6 +60,7 @@ class UserController extends Controller
             $data['sidebar'] = 'user';
             $data['sidebar_sub'] = 'users';
             $data['user'] = $user;
+            $data['roles'] = Role::notId()->get();
             return view('admin.users.edit', $data);
         }
 
@@ -60,6 +77,8 @@ class UserController extends Controller
             $user->nid = $request->nid;
             $user->status = $request->status;
             $user->save();
+
+            $roleUser = UserRole::where('user_id', $id)->update(['role_id' => $request->role_id]);
 
             return redirect()->route('admin.users')->with('success', actionMessage('update'));
         }
@@ -99,5 +118,24 @@ class UserController extends Controller
             ->get();
 
         return response()->json($users);
+    }
+
+    public function commission(UserCommissionDataTable $dataTable, $id)
+    {
+         $data['sidebar'] = 'user';
+         $data['sidebar_sub'] = 'users';
+
+         session()->put('user_commission_id', $id);
+
+         return $dataTable->render('admin.users.commission', $data);
+    }
+
+    public function referralUser(ReferUsersDataTable $dataTable, $id)
+    {
+         $data['sidebar'] = 'user';
+         $data['sidebar_sub'] = 'users';
+         session()->put('user_refer_id', $id);
+
+         return $dataTable->render('admin.users.referral_user', $data);
     }
 }

@@ -7,5 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserCommission extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'to_user_id',
+        'from_user_id',
+        'from_refer_user_id',
+        'commission',
+    ];
+
+    public function toUser()
+    {
+        return $this->belongsTo('App\Models\User', 'to_user_id');
+    }
+
+    public function fromUser()
+    {
+        return $this->belongsTo('App\Models\User', 'from_user_id');
+    }
+
+    public function fromReferUser()
+    {
+        return $this->belongsTo('App\Models\User', 'from_refer_user_id');
+    }
 }
