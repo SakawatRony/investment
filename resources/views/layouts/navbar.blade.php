@@ -30,7 +30,7 @@
                 <li class="user-header text-bg-primary">
                   <p>
                     {{ auth()->user()->full_name }}
-                    <small>Member since </small>
+                    <small>Member since {{ timeZoneformatDate(auth()->user()->created_at) .' '. timeZonegetTime(auth()->user()->created_at) }}</small>
                   </p>
                 </li>
                 <!--end::User Image-->
@@ -46,7 +46,7 @@
                 <!--begin::Menu Footer-->
                 <li class="user-footer">
                   <a href="{{ route('admin.change.password') }}" class="btn btn-default btn-flat">Change Password</a>
-                  <a href="{{ route('admin.logout')}}" class="btn btn-default btn-flat float-end">Sign out</a>
+                  <a href="{{ auth()->user()->roleUser?->role_id == '1' || auth()->user()->roleUser?->role_id == '2' ? route('admin.logout') :  route('user.logout')}}" class="btn btn-default btn-flat float-end">Sign out</a>
                 </li>
                 <!--end::Menu Footer-->
               </ul>

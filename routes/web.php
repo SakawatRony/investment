@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\{ DashboardController, LoginController, UnitController, UserController, UnitUserController};
+use App\Http\Controllers\User\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::get( '/registration', [LoginController::class, 'signUp'])->name('signUp');
 Route::post( '/registration', [LoginController::class, 'register'])->name('registration');
 
-Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () {
+Route::name('admin.')->prefix('admin')->middleware(['auth', 'permission'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -50,4 +51,15 @@ Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () 
 
     Route::get('/user/commission/{id}', [UserController::class, 'commission'])->name('user.commissions');
     Route::get('/user/referral-user/{id}', [UserController::class, 'referralUser'])->name('user.referralUsers');
+});
+
+Route::name('user.')->prefix('user')->middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/pins', [UserDashboardController::class, 'unit'])->name('units');
+    Route::get('/commission', [UserDashboardController::class, 'commission'])->name('commissions');
+    Route::get('/logout', [UserDashboardController::class, 'logout'])->name('logout');
+});
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
 });

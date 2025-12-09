@@ -2,7 +2,7 @@
         <!--begin::Sidebar Brand-->
         <div class="sidebar-brand">
           <!--begin::Brand Link-->
-          <a href="{{ route('admin.dashboard')}}" class="brand-link">
+          <a href="{{ route('user.dashboard')}}" class="brand-link">
             <!--begin::Brand Text-->
             <span class="brand-text fw-light">Welcome to the User</span>
             <!--end::Brand Text-->
@@ -23,12 +23,24 @@
               id="navigation"
             >
               <li class="nav-item">
-                <a href="{{ route('admin.dashboard')}}" class="nav-link {{ isset($sidebar) && $sidebar == 'dashboard' ? 'active' : null }}">
+                <a href="{{ route('user.dashboard')}}" class="nav-link {{ isset($sidebar) && $sidebar == 'dashboard' ? 'active' : null }}">
                   <i class="nav-icon bi bi-speedometer"></i>
                   <p>Dashboard</p>
                 </a>
               </li>
-              <li class="nav-item {{ isset($sidebar) && $sidebar == 'user' ? 'menu-open' : null }}">
+              <li class="nav-item">
+                <a href="{{ route('user.units')}}" class="nav-link {{ isset($sidebar) && $sidebar == 'unit' ? 'active' : null }}">
+                  <i class="nav-icon bi bi-geo-fill"></i>
+                  <p>Unit PINs</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('user.commissions')}}" class="nav-link {{ isset($sidebar) && $sidebar == 'commission' ? 'active' : null }}">
+                  <i class="nav-icon bi bi-cash-stack"></i>
+                  <p>Commissions</p>
+                </a>
+              </li>
+              {{-- <li class="nav-item {{ isset($sidebar) && $sidebar == 'user' ? 'menu-open' : null }}">
                 <a href="#" class="nav-link {{ isset($sidebar) && $sidebar == 'user' ? 'active' : null }}">
                   <i class="nav-icon bi bi-people-fill"></i>
                   <p>
@@ -50,36 +62,7 @@
                     </a>
                   </li>
                 </ul>
-              </li>
-              <li class="nav-item {{ isset($sidebar) && $sidebar == 'unit' ? 'menu-open' : null }}">
-                <a href="#" class="nav-link {{ isset($sidebar) && $sidebar == 'unit' ? 'active' : null }}">
-                  <i class="nav-icon bi bi-info-circle"></i>
-                  <p>
-                    Units
-                    <i class="nav-arrow bi bi-chevron-right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('admin.units.create')}}" class="nav-link {{ isset($sidebar) && isset($sidebar_sub) && $sidebar == 'unit' && $sidebar_sub == 'unit_create' ? 'active' : null }}">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Add Unit</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('admin.units')}}" class="nav-link {{ isset($sidebar) && isset($sidebar_sub) && $sidebar == 'unit' && $sidebar_sub == 'units' ? 'active' : null }}">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Unit</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('admin.units.user')}}" class="nav-link {{ isset($sidebar) && isset($sidebar_sub) && $sidebar == 'unit' && $sidebar_sub == 'unit_users' ? 'active' : null }}">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Unit Users</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              </li> --}}
 
               {{-- <li class="nav-item">
                 <a href="{{ route('admin.dashboard')}}" class="nav-link {{ isset($sidebar) && $sidebar == 'settings' ? 'active' : null }}">

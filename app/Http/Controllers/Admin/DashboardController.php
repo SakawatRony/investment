@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Models\Unit;
+use App\Models\UnitUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
@@ -13,6 +15,10 @@ class DashboardController extends Controller
     public function index()
     {
         $data['sidebar'] = 'dashboard';
+        $data['totalUser'] = User::notId()->where('status', 'active')->count();
+        $data['totalUnit'] = Unit::count();
+        $data['totalPin'] = UnitUser::count();
+        $data['totalPinUsed'] = UnitUser::where('is_used', 1)->count();
         return view('admin.dashboard', $data);
     }
 

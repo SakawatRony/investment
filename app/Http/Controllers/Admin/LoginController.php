@@ -19,7 +19,7 @@ class LoginController extends Controller
     public function index()
     {
         if(Auth::check()) {
-            return redirect()->intended(route('admin.dashboard'));
+            return $this->redirectRole();
         }
 
         return view('admin.auth.login');
@@ -39,15 +39,29 @@ class LoginController extends Controller
         $credentials2 = $request->only('phone', 'password');
 
         if (Auth::guard('user')->attempt($credentials1) || Auth::guard('user')->attempt($credentials2)) {
-            return redirect()->intended(route('admin.dashboard'));
+
+            return $this->redirectRole();
+
         }
 
         return redirect()->back()->with('error', 'Invalid credentials');
     }
 
+    public function redirectRole()
+    {
+        if(auth()->user()->roleUser?->role_id == '1' || auth()->user()->roleUser?->role_id == '2') {
+                return redirect()->intended(route('admin.dashboard'));
+        } else {
+            return redirect()->intended(route('user.dashboard'));
+        }
+    }
+
     public function signUp()
     {
-        $this->authCheck();
+        if(Auth::check()) {
+            return $this->redirectRole();
+        }
+        
         return view('admin.auth.registration');
     }
 
@@ -130,7 +144,7 @@ class LoginController extends Controller
     public function authCheck()
     {
         if(Auth::check()) {
-            return redirect()->intended(route('admin.dashboard'));
+            return $this->redirectRole();
         }
     }
 
