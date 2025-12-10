@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('unit_users', function (Blueprint $table) {
             $table->foreign(['user_id'])->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreign(['unit_id'])->references(['id'])->on('units')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -24,7 +23,6 @@ return new class extends Migration
     {
         Schema::table('unit_users', function (Blueprint $table) {
             $table->dropForeign('users_user_id_foreign_idx');
-            $table->dropForeign('units_unit_id_foreign_idx');
         });
     }
 };

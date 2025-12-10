@@ -35,22 +35,29 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="user_id">User Name*</label>
+                        <label for="user_id">Select Unit For*</label>
                         <select class="form-control select2 p-3" name="user_id" id="user_id" required>
                             <option value="">Select One</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="user_id">Unit*</label>
-                        <select class="form-control" name="unit_id" id="unit_id" required>
+                        <label for="unit_name">Unit*</label>
+                        <select class="form-control" name="unit_name" id="unit_name" required>
                             <option value="">Select Unit</option>
-                            @foreach ($units as $unit)
-                            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
-                            @endforeach
+                            <option value="10 Unit">10 Unit</option>
+                            <option value="20 Unit">20 Unit</option>
+                            <option value="30 Unit">30 Unit</option>
+                            <option value="40 Unit">40 Unit</option>
+                            <option value="50 Unit">50 Unit</option>
+                            <option value="60 Unit">60 Unit</option>
+                            <option value="70 Unit">70 Unit</option>
+                            <option value="80 Unit">80 Unit</option>
+                            <option value="90 Unit">90 Unit</option>
+                            <option value="100 Unit">100 Unit</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="total_number">Total Number*</label>
+                        <label for="total_number">Total Number Of Pin*</label>
                         <input type="number" min="1" step="1" class="form-control" id="total_number" required name="total_number" value="{{ old('total_number')}}" placeholder="Total Number">
                     </div>
                 </div>

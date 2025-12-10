@@ -16,4 +16,9 @@ class ReferralUser extends Model
     {
         return $this->belongsTo('App\Models\User', 'user_id');
     }
+
+    public function refer()
+    {
+        return $this->belongsTo('App\Models\User', 'referral_id');
+    }
 }

@@ -25,7 +25,7 @@ class UserListDataTable extends DataTable
                 return $users->roleUser?->role?->name;
             })
             ->editColumn('user_name', function ($users) {
-                return ''.$users->user_name.'<br><a href="'.route('admin.user.commissions', $users->id).'">Commission</a> | <a href="'.route('admin.user.referralUsers', $users->id).'">Referral User</a>';
+                return $users->user_name.'<br><a href="'.route('admin.user.commissions', $users->id).'">Commission</a> | <a href="'.route('admin.user.referralUsers', $users->id).'">Referral User</a> | <a href="'.route('admin.user.tree', $users->id).'">Tree</a>';
             })
             ->addColumn('action', function ($users) {
 

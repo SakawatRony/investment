@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\UnitUserListDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UnitUserRequest;
-use App\Models\Unit;
 use App\Models\UnitUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -23,7 +22,6 @@ class UnitUserController extends Controller
     {
         $data['sidebar'] = 'unit';
         $data['sidebar_sub'] = 'unit_users';
-        $data['units'] = Unit::get();
         return view('admin.unit_user.create', $data);
     }
 

@@ -38,14 +38,14 @@
                 <li class="user-body">
                   <!--begin::Row-->
                   <div class="row">
-                    <div class="col-12 text-center"><a href="#">Profile</a></div>
+                    <div class="col-12 text-center"><a href="{{ auth()->user()->roleUser?->role_id == '1' || auth()->user()->roleUser?->role_id == '2' ? route('admin.users.edit', auth()->user()->id) :  route('user.profile.edit') }}">Profile</a></div>
                   </div>
                   <!--end::Row-->
                 </li>
                 <!--end::Menu Body-->
                 <!--begin::Menu Footer-->
                 <li class="user-footer">
-                  <a href="{{ route('admin.change.password') }}" class="btn btn-default btn-flat">Change Password</a>
+                  <a href="{{ auth()->user()->roleUser?->role_id == '1' || auth()->user()->roleUser?->role_id == '2' ? route('admin.change.password') :  route('user.change.password') }}" class="btn btn-default btn-flat">Change Password</a>
                   <a href="{{ auth()->user()->roleUser?->role_id == '1' || auth()->user()->roleUser?->role_id == '2' ? route('admin.logout') :  route('user.logout')}}" class="btn btn-default btn-flat float-end">Sign out</a>
                 </li>
                 <!--end::Menu Footer-->

@@ -29,6 +29,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('user.signUp')}}" class="nav-link {{ isset($sidebar) && $sidebar == 'sign_up' ? 'active' : null }}">
+                  <i class="nav-icon bi bi-people-fill"></i>
+                  <p>User Sign UP</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('user.units')}}" class="nav-link {{ isset($sidebar) && $sidebar == 'unit' ? 'active' : null }}">
                   <i class="nav-icon bi bi-geo-fill"></i>
                   <p>Unit PINs</p>

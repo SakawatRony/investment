@@ -23,10 +23,13 @@ class CommissionDataTable extends DataTable
             ->editColumn('from_refer_user_id', function ($users) {
                 return isset($users->fromReferUser) ? $users->fromReferUser?->user_name . " (".$users->fromReferUser?->phone.")" : "N/A";
             })
+            ->addColumn('commission', function ($users) {
+                return number_format($users->commission);
+            })
             ->addColumn('created_at', function ($users) {
                 return timeZoneformatDate($users->created_at) .'<br>'. timeZonegetTime($users->created_at);
             })
-            ->rawColumns(['id', 'from_user_id', 'from_refer_user_id', 'created_at'])
+            ->rawColumns(['id', 'from_user_id', 'from_refer_user_id', 'commission', 'created_at'])
             ->make(true);
     }
 
@@ -38,7 +41,6 @@ class CommissionDataTable extends DataTable
     public function query()
     {
         $users = UserCommission::where('to_user_id', auth()->user()->id);
-        session()->forget('user_commission_id');
         return $this->applyScopes($users);
     }
 
@@ -53,6 +55,7 @@ class CommissionDataTable extends DataTable
             ->addColumn(['data' => 'id', 'name' => 'id', 'title' => 'Id', 'visible' => false])
             ->addColumn(['data' => 'from_user_id', 'name' => 'from_user_id', 'title' => 'From User'])
             ->addColumn(['data' => 'from_refer_user_id', 'name' => 'from_refer_user_id', 'title' => 'From Referral'])
+            ->addColumn(['data' => 'commission', 'name' => 'commission', 'title' => 'Commission %'])
             ->addColumn(['data' => 'created_at', 'name' => 'created_at', 'title' => __('Created')])
             ->parameters([
                 'order'      => [0, 'DESC'],

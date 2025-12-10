@@ -29,7 +29,7 @@
         <div class="col-md-4"></div>
          <div class="col-md-4"></div>
         <div class="col-md-4 d-flex justify-content-end">
-           <a class="btn btn-primary" href="{{ route('admin.units.user.create')}}">Add User Units</a>
+           <a class="btn btn-primary" href="{{ route('admin.units.user.create')}}">Add User Unit PINs</a>
         </div>
         @include('layouts.includes.yajra_data_table')
         </div>

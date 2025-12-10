@@ -51,13 +51,23 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'permission'])->grou
 
     Route::get('/user/commission/{id}', [UserController::class, 'commission'])->name('user.commissions');
     Route::get('/user/referral-user/{id}', [UserController::class, 'referralUser'])->name('user.referralUsers');
+
+     Route::get('/user/tree/{id}', [UserController::class, 'showTree'])->name('user.tree');
 });
 
 Route::name('user.')->prefix('user')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     Route::get('/pins', [UserDashboardController::class, 'unit'])->name('units');
     Route::get('/commission', [UserDashboardController::class, 'commission'])->name('commissions');
+    Route::get('/sign-up', [UserDashboardController::class, 'signUp'])->name('signUp');
+    Route::post('/sign-up', [UserDashboardController::class, 'signupSubmit'])->name('signUp.submit');
     Route::get('/logout', [UserDashboardController::class, 'logout'])->name('logout');
+
+    Route::get('/change-password', [UserDashboardController::class, 'changePassword'])->name('change.password');
+    Route::post('/change-password', [UserDashboardController::class, 'changePasswordSubmit'])->name('change.password.submit');
+
+    Route::get('/user-edit', [UserDashboardController::class, 'edit'])->name('profile.edit');
+    Route::post('/user-update', [UserDashboardController::class, 'update'])->name('profile.update');
 });
 
 Route::fallback(function () {

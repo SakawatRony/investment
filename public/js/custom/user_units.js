@@ -1,7 +1,7 @@
 'use strict'
 
 $('#user_id').select2({
-    placeholder: 'Search User Name…',
+    placeholder: 'Search User Name or Phone…',
     minimumInputLength: 2,
     ajax: {
         url: SITE_URL + "/users/search",

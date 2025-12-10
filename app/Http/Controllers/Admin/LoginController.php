@@ -61,7 +61,7 @@ class LoginController extends Controller
         if(Auth::check()) {
             return $this->redirectRole();
         }
-        
+
         return view('admin.auth.registration');
     }
 
@@ -97,8 +97,9 @@ class LoginController extends Controller
                     if($commission->slug == 'first') {
                         $request['to_user_id'] = $unitUser->user_id; // receive commssion
                         $request['from_user_id'] = $user->id; ///From which user receive comssion to_user_id
+                        $request['from_refer_user_id'] = $unitUser->user_id;
                         $request['commission'] = $commission->value;
-                        $commissionUser = UserCommission::create($request->only('to_user_id', 'from_user_id', 'commission'));
+                        $commissionUser = UserCommission::create($request->only('to_user_id', 'from_user_id','from_refer_user_id', 'commission'));
                     }
 
                     if($commission->slug == 'second') {

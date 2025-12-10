@@ -27,7 +27,10 @@ class UserCommissionDataTable extends DataTable
             ->addColumn('created_at', function ($users) {
                 return timeZoneformatDate($users->created_at) .'<br>'. timeZonegetTime($users->created_at);
             })
-            ->rawColumns(['id', 'from_user_id', 'from_refer_user_id', 'created_at'])
+            ->addColumn('commission', function ($users) {
+                return number_format($users->commission);
+            })
+            ->rawColumns(['id', 'from_user_id', 'from_refer_user_id', 'commission', 'created_at'])
             ->make(true);
     }
 
@@ -54,6 +57,7 @@ class UserCommissionDataTable extends DataTable
             ->addColumn(['data' => 'id', 'name' => 'id', 'title' => 'Id', 'visible' => false])
             ->addColumn(['data' => 'from_user_id', 'name' => 'from_user_id', 'title' => 'From User'])
             ->addColumn(['data' => 'from_refer_user_id', 'name' => 'from_refer_user_id', 'title' => 'From Referral'])
+            ->addColumn(['data' => 'commission', 'name' => 'commission', 'title' => 'Commission %'])
             ->addColumn(['data' => 'created_at', 'name' => 'created_at', 'title' => __('Created')])
             ->parameters([
                 'order'      => [0, 'DESC'],

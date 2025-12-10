@@ -16,7 +16,7 @@ class DashboardController extends Controller
     {
         $data['sidebar'] = 'dashboard';
         $data['totalUser'] = User::notId()->where('status', 'active')->count();
-        $data['totalUnit'] = Unit::count();
+        $data['totalUnit'] = 0;
         $data['totalPin'] = UnitUser::count();
         $data['totalPinUsed'] = UnitUser::where('is_used', 1)->count();
         return view('admin.dashboard', $data);

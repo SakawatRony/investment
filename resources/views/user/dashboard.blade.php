@@ -2,6 +2,10 @@
 
 @section('title', 'Royal Glory Residence Ltd')
 
+@section('css')
+ <link rel="stylesheet" href="{{ asset('public/css/custom/tree.css') }}" />
+@endsection
+
 @section('content')
     <!--begin::App Content Header-->
     <div class="app-content-header">
@@ -15,7 +19,7 @@
                 <div class="small-box text-bg-primary">
                   <div class="inner">
                     <h3>{{ $totalReferral }}</h3>
-                    <p>Total Referral</p>
+                    <p>Total Refer User</p>
                   </div>
                   <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z"></path>
@@ -55,6 +59,42 @@
               <!--end::Col-->
             </div>
         <!--end::Row-->
+        </div>
+        <hr>
+        <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+        {{--Multi tier div--}}
+        @if(isset($referralUser) && count($referralUser) > 0)
+            <div class="tree">
+                <h3 class="mb-0 text-center">Here will show user tree</h3>
+                <ul>
+                    <li>
+                        <a href="javascript:void(0)">{{ auth()->user()->user_name }}</a>
+                        @php
+                           $childs = $referralUser;
+
+                        @endphp
+                        <ul>
+                            @foreach($childs as $child)
+                                <li>
+                                    <a href="javascript:void(0)">{{ $child->user?->user_name }}</a>
+                                    @php
+                                        $grandChilds = App\Models\ReferralUser::where('referral_id', $child->user_id)->get()
+                                    @endphp
+                                    @if(!empty($grandChilds) && count($grandChilds) > 0)
+                                        @include('user.child', ['grandChilds' => $grandChilds])
+                                    @endif
+
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        @else
+            <span>{{ __('There is no tree!') }}</span>
+        @endif
+           </div>
         </div>
         <!--end::Container-->
     </div>

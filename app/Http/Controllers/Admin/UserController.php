@@ -7,6 +7,7 @@ use App\DataTables\UserCommissionDataTable;
 use App\DataTables\UserListDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Models\ReferralUser;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserRole;
@@ -110,7 +111,7 @@ class UserController extends Controller
     {
         $search = $request->q;
 
-        $users = User::where('user_name', 'like', '%' . $search . '%')
+        $users = User::where('user_name', 'like', '%' . $search . '%')->orWhere('phone', 'like', '%' . $search . '%')
             ->notId()
             ->active()
             ->select('id', 'user_name as text')
@@ -125,6 +126,12 @@ class UserController extends Controller
          $data['sidebar'] = 'user';
          $data['sidebar_sub'] = 'users';
 
+         $data['userData'] = User::where('id', $id)->first();
+
+        if (empty($data['userData'])) {
+            return redirect()->back()->with('error', actionMessage('notFound'));
+        }
+
          session()->put('user_commission_id', $id);
 
          return $dataTable->render('admin.users.commission', $data);
@@ -134,8 +141,29 @@ class UserController extends Controller
     {
          $data['sidebar'] = 'user';
          $data['sidebar_sub'] = 'users';
+
+         $data['userData'] = User::where('id', $id)->first();
+
+        if (empty($data['userData'])) {
+            return redirect()->back()->with('error', actionMessage('notFound'));
+        }
+
          session()->put('user_refer_id', $id);
 
          return $dataTable->render('admin.users.referral_user', $data);
+    }
+
+    public function showTree($id)
+    {
+        $data['sidebar'] = 'user';
+        $data['sidebar_sub'] = 'users';
+        $data['userData'] = User::where('id', $id)->first();
+
+        if (empty($data['userData'])) {
+            return redirect()->back()->with('error', actionMessage('notFound'));
+        }
+
+        $data['referralUser'] = ReferralUser::where('referral_id', $id)->get();
+        return view('admin.users.tree', $data);
     }
 }

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigInteger('id', true);
-            $table->bigInteger('user_id')->index('users_user_id_foreign_idx')->nullable();
-            $table->decimal('price', 10, 2)->nullable();
-            $table->bigInteger('unit_id')->index('units_unit_id_foreign_idx')->nullable();
+            $table->bigInteger('user_id')->nullable()->index('users_user_id_foreign_idx')->nullable();
+            $table->decimal('price', 10, 2)->nullable()->nullable();
+            $table->bigInteger('unit_user_id')->nullable()->index('units_unit_user_id_foreign_idx')->nullable();
             $table->decimal('commission', 10, 2)->nullable();
             $table->text('params')->nullable();
             $table->string('type')->nullable();

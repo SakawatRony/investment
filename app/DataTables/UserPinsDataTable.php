@@ -21,8 +21,8 @@ class UserPinsDataTable  extends DataTable
            ->addColumn('user', function ($units) {
                 return $units->user?->full_name;
             })
-            ->addColumn('unit', function ($units) {
-                return $units->unit?->name;
+            ->addColumn('unit_name', function ($units) {
+                return $units->unit_name;
             })
             ->addColumn('is_used', function ($units) {
                 return $units->is_used == 1 ? 'Used' : 'Not Used';
@@ -30,7 +30,7 @@ class UserPinsDataTable  extends DataTable
             ->addColumn('created_at', function ($units) {
                 return timeZoneformatDate($units->created_at) .'<br>'. timeZonegetTime($units->created_at);
             })
-            ->rawColumns(['id', 'user', 'pin', 'is_used', 'created_at'])
+            ->rawColumns(['id', 'user', 'pin', 'unit_name', 'is_used', 'created_at'])
             ->make(true);
     }
 
@@ -55,7 +55,7 @@ class UserPinsDataTable  extends DataTable
         return $this->builder()
             ->addColumn(['data' => 'id', 'name' => 'id', 'title' => 'Id', 'visible' => false])
             ->addColumn(['data' => 'user', 'name' => 'user', 'title' => 'User'])
-            ->addColumn(['data' => 'unit', 'name' => 'unit', 'title' => 'Unit'])
+            ->addColumn(['data' => 'unit_name', 'name' => 'unit_name', 'title' => 'Unit'])
             ->addColumn(['data' => 'pin', 'name' => 'pin', 'title' => 'Pin'])
             ->addColumn(['data' => 'is_used', 'name' => 'is_used', 'title' => 'Is Used'])
             ->addColumn(['data' => 'created_at', 'name' => 'created_at', 'title' => __('Created')])
