@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\{ DashboardController, LoginController, UnitController, UserController, UnitUserController};
+use App\Http\Controllers\Admin\{ DashboardController, InvoiceController, LoginController, UnitController, UserController, UnitUserController};
 use App\Http\Controllers\User\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,7 +52,13 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'permission'])->grou
     Route::get('/user/commission/{id}', [UserController::class, 'commission'])->name('user.commissions');
     Route::get('/user/referral-user/{id}', [UserController::class, 'referralUser'])->name('user.referralUsers');
 
-     Route::get('/user/tree/{id}', [UserController::class, 'showTree'])->name('user.tree');
+    Route::get('/user/tree/{id}', [UserController::class, 'showTree'])->name('user.tree');
+
+    Route::get('/user/all-commissions', [InvoiceController::class, 'index'])->name('user.allCommission');
+    Route::get('/user/generate-invoice/{id}', [InvoiceController::class, 'generate'])->name('user.generateInvoice');
+    Route::post('/user/generate-invoice/{id}', [InvoiceController::class, 'invoice'])->name('user.generateInvoice.submit');
+
+    Route::get('/user/invoice/{id}', [InvoiceController::class, 'invoiceView'])->name('user.invoice');
 });
 
 Route::name('user.')->prefix('user')->middleware(['auth'])->group(function () {

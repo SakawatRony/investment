@@ -55,30 +55,31 @@
                 <a href="#" class="nav-link {{ isset($sidebar) && $sidebar == 'unit' ? 'active' : null }}">
                   <i class="nav-icon bi bi-info-circle"></i>
                   <p>
-                    Units
+                    Unit
                     <i class="nav-arrow bi bi-chevron-right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                  {{-- <li class="nav-item">
-                    <a href="{{ route('admin.units.create')}}" class="nav-link {{ isset($sidebar) && isset($sidebar_sub) && $sidebar == 'unit' && $sidebar_sub == 'unit_create' ? 'active' : null }}">
+                  <li class="nav-item">
+                    <a href="{{ route('admin.units.user.create')}}" class="nav-link {{ isset($sidebar) && isset($sidebar_sub) && $sidebar == 'unit' && $sidebar_sub == 'unit_users_create' ? 'active' : null }}">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>Add Unit</p>
+                      <p>Create Unit PINs</p>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="{{ route('admin.units')}}" class="nav-link {{ isset($sidebar) && isset($sidebar_sub) && $sidebar == 'unit' && $sidebar_sub == 'units' ? 'active' : null }}">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Unit</p>
-                    </a>
-                  </li> --}}
                   <li class="nav-item">
                     <a href="{{ route('admin.units.user')}}" class="nav-link {{ isset($sidebar) && isset($sidebar_sub) && $sidebar == 'unit' && $sidebar_sub == 'unit_users' ? 'active' : null }}">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>Create User Unit PINs</p>
+                      <p>User Unit PINs</p>
                     </a>
                   </li>
                 </ul>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('admin.user.allCommission')}}" class="nav-link {{ isset($sidebar) && $sidebar == 'invoice' ? 'active' : null }}">
+                  <i class="nav-icon bi bi-receipt"></i>
+                  <p>Applicable Invoices</p>
+                </a>
               </li>
 
               {{-- <li class="nav-item">

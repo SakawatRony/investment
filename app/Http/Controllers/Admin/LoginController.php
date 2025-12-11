@@ -99,8 +99,9 @@ class LoginController extends Controller
                         $request['to_user_id'] = $unitUser->user_id; // receive commssion
                         $request['from_user_id'] = $user->id; ///From which user receive comssion to_user_id
                         $request['from_refer_user_id'] = $unitUser->user_id;
+                        $request['unit_user_id'] = $unitUser->id;
                         $request['commission'] = $commission->value;
-                        $commissionUser = UserCommission::create($request->only('to_user_id', 'from_user_id','from_refer_user_id', 'commission'));
+                        $commissionUser = UserCommission::create($request->only('to_user_id', 'from_user_id','from_refer_user_id', 'unit_user_id', 'commission'));
                     }
 
                     if($commission->slug == 'second') {
@@ -111,8 +112,9 @@ class LoginController extends Controller
                             $request['to_user_id'] = $secondReferralUser->referral_id; // receive commssion
                             $request['from_user_id'] = $user->id; //From which user receive comssion to_user_id
                             $request['from_refer_user_id'] = $secondReferralUser->user_id; // Which is been referral for get commission to_user_id
+                            $request['unit_user_id'] = $unitUser->id;
                             $request['commission'] = $commission->value;
-                            $commissionUser = UserCommission::create($request->only('to_user_id', 'from_user_id', 'from_refer_user_id', 'commission'));
+                            $commissionUser = UserCommission::create($request->only('to_user_id', 'from_user_id', 'from_refer_user_id', 'unit_user_id', 'commission'));
                         }
                     }
 
@@ -124,8 +126,9 @@ class LoginController extends Controller
                             $request['to_user_id'] = $thirdReferralUser->referral_id;
                             $request['from_user_id'] = $user->id; //which user receive comssion
                             $request['from_refer_user_id'] = $thirdReferralUser->user_id; // Which is been referral for get commission to_user_id
+                            $request['unit_user_id'] = $unitUser->id;
                             $request['commission'] = $commission->value;
-                            $commissionUser = UserCommission::create($request->only('to_user_id', 'from_user_id', 'from_refer_user_id', 'commission'));
+                            $commissionUser = UserCommission::create($request->only('to_user_id', 'from_user_id', 'from_refer_user_id', 'unit_user_id', 'commission'));
                         }
                     }
                 }

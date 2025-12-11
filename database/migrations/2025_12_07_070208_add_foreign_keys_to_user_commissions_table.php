@@ -15,6 +15,7 @@ return new class extends Migration
             $table->foreign(['to_user_id'])->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign(['from_user_id'])->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign(['from_refer_user_id'])->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign(['unit_user_id'])->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->dropForeign('users_to_user_id_foreign_idx');
             $table->dropForeign('users_from_user_id_foreign_idx');
             $table->dropForeign('users_from_from_refer_user_id_foreign_idx');
+            $table->dropForeign('users_to_unit_user_id_foreign_idx');
         });
     }
 };
