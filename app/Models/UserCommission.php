@@ -11,6 +11,7 @@ class UserCommission extends Model
         'to_user_id',
         'from_user_id',
         'from_refer_user_id',
+        'unit_user_id',
         'commission',
     ];
 

@@ -21,7 +21,7 @@ class UnitUserController extends Controller
     public function create()
     {
         $data['sidebar'] = 'unit';
-        $data['sidebar_sub'] = 'unit_users';
+        $data['sidebar_sub'] = 'unit_users_create';
         return view('admin.unit_user.create', $data);
     }
 

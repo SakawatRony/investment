@@ -56,7 +56,7 @@ class UserCommissionDataTable extends DataTable
         return $this->builder()
             ->addColumn(['data' => 'id', 'name' => 'id', 'title' => 'Id', 'visible' => false])
             ->addColumn(['data' => 'from_user_id', 'name' => 'from_user_id', 'title' => 'From User'])
-            ->addColumn(['data' => 'from_refer_user_id', 'name' => 'from_refer_user_id', 'title' => 'From Referral'])
+            ->addColumn(['data' => 'from_refer_user_id', 'name' => 'from_refer_user_id', 'title' => 'From Refer'])
             ->addColumn(['data' => 'commission', 'name' => 'commission', 'title' => 'Commission %'])
             ->addColumn(['data' => 'created_at', 'name' => 'created_at', 'title' => __('Created')])
             ->parameters([
