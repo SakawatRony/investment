@@ -23,7 +23,7 @@ class UnitUserRequest extends FormRequest
     {
         return [
             'user_id' => 'required|exists:users,id',
-            'unit_name' => 'required',
+            'unit_value' => 'required',
             'total_number' => 'required|integer',
         ];
     }

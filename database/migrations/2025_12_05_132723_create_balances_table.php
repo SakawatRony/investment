@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('balances', function (Blueprint $table) {
+            $table->bigInteger('id', true);
             $table->bigInteger('user_id')->index('users_user_id_foreign_idx');
             $table->decimal('amount', 10, 2)->default('0');
             $table->timestamp('created_at')->useCurrent();

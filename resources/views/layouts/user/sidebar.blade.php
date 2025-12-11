@@ -46,6 +46,12 @@
                   <p>Commissions</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('user.invoices')}}" class="nav-link {{ isset($sidebar) && $sidebar == 'invoice' ? 'active' : null }}">
+                  <i class="nav-icon bi bi-receipt"></i>
+                  <p>Invoices</p>
+                </a>
+              </li>
               {{-- <li class="nav-item {{ isset($sidebar) && $sidebar == 'user' ? 'menu-open' : null }}">
                 <a href="#" class="nav-link {{ isset($sidebar) && $sidebar == 'user' ? 'active' : null }}">
                   <i class="nav-icon bi bi-people-fill"></i>

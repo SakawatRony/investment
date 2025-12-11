@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Models\Setting;
 use App\Models\Unit;
 use App\Models\UnitUser;
 use App\Models\User;
@@ -35,5 +36,20 @@ class DashboardController extends Controller
         }
 
         return redirect()->back()->with('error', 'Something went wrong while updating your profile.');
+    }
+
+    public function settings()
+    {
+        $data['sidebar'] = 'settings';
+        $data['settings'] = Setting::first();
+
+        return view('admin.settings', $data);
+    }
+
+    public function settingsUpdate(Request $request)
+    {
+        Setting::where('id', 1)->update(['company_name' => $request->company_name, 'address'=> $request->address, 'phone'=>$request->phone]);
+
+        return redirect()->back()->with('success', actionMessage('update'));
     }
 }

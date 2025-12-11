@@ -61,6 +61,12 @@ class User extends Authenticatable
         return $this->hasOne(UserRole::class);
     }
 
+    public function balance()
+    {
+        return $this->hasOne(Balance::class);
+    }
+
+
     protected function password(): Attribute
     {
     return Attribute::make(

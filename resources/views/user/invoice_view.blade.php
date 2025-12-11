@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user.app2')
 
 @section('title', 'Invoice')
 

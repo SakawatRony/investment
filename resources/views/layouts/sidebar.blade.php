@@ -82,12 +82,19 @@
                 </a>
               </li>
 
-              {{-- <li class="nav-item">
-                <a href="{{ route('admin.dashboard')}}" class="nav-link {{ isset($sidebar) && $sidebar == 'settings' ? 'active' : null }}">
+              <li class="nav-item">
+                <a href="{{ route('admin.user.invoices')}}" class="nav-link {{ isset($sidebar) && $sidebar == 'generate_invoice' ? 'active' : null }}">
+                  <i class="nav-icon bi bi-receipt"></i>
+                  <p>Generated Invoices</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('admin.settings')}}" class="nav-link {{ isset($sidebar) && $sidebar == 'settings' ? 'active' : null }}">
                   <i class="nav-icon bi bi-gear-fill"></i>
                   <p>Settings</p>
                 </a>
-              </li> --}}
+              </li>
             </ul>
             <!--end::Sidebar Menu-->
           </nav>

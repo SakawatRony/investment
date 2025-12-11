@@ -60,9 +60,6 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'permission'])->grou
 
     Route::get('/user/invoices', [InvoiceController::class, 'invoiceList'])->name('user.invoices');
     Route::get('/user/invoice/{id}', [InvoiceController::class, 'invoiceView'])->name('user.invoiceView');
-
-    Route::get('/settings', [DashboardController::class, 'settings'])->name('settings');
-    Route::post('/settings', [DashboardController::class, 'settingsUpdate'])->name('settingsUpdate');
 });
 
 Route::name('user.')->prefix('user')->middleware(['auth'])->group(function () {
@@ -78,9 +75,6 @@ Route::name('user.')->prefix('user')->middleware(['auth'])->group(function () {
 
     Route::get('/user-edit', [UserDashboardController::class, 'edit'])->name('profile.edit');
     Route::post('/user-update', [UserDashboardController::class, 'update'])->name('profile.update');
-
-    Route::get('/invoices', [UserDashboardController::class, 'invoices'])->name('invoices');
-    Route::get('/invoice/{id}', [UserDashboardController::class, 'invoiceView'])->name('invoiceView');
 });
 
 Route::fallback(function () {

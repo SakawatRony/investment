@@ -36,6 +36,7 @@ class UnitUserController extends Controller
                 $pin = Str::random(6);
             } while (UnitUser::where('pin', $pin)->exists());
 
+            $request['unit_name'] = $request->unit_value." P";
             $request['pin'] = $pin;
 
             UnitUser::create($request->all());

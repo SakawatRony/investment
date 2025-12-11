@@ -29,4 +29,9 @@ class UserCommission extends Model
     {
         return $this->belongsTo('App\Models\User', 'from_refer_user_id');
     }
+
+    public function unitUser()
+    {
+        return $this->belongsTo('App\Models\UnitUser', 'unit_user_id');
+    }
 }

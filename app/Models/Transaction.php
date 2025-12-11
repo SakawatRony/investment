@@ -25,4 +25,9 @@ class Transaction extends Model
     {
         return $this->belongsTo('App\Models\UnitUser', 'unit_user_id');
     }
+
+    public function userCommission()
+    {
+        return $this->belongsTo('App\Models\UserCommission', 'params');
+    }
 }

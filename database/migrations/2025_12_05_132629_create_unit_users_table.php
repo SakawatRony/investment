@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigInteger('id', true);
             $table->bigInteger('user_id')->index('users_user_id_foreign_idx');
             $table->string('unit_name')->index();
+            $table->integer('unit_value')->index();
             $table->integer('total_number')->index();
             $table->string('pin');
             $table->text('params')->nullable();

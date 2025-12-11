@@ -11,6 +11,7 @@ class UnitUser extends Model
         'user_id',
         'pin',
         'unit_name',
+        'unit_value',
         'total_number',
         'params',
     ];

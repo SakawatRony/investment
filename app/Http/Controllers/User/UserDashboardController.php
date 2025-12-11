@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\User;
 
 use App\DataTables\CommissionDataTable;
+use App\DataTables\UserInvoiceListDataTabble;
 use App\DataTables\UserPinsDataTable;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UserRegistrationRequest;
+use App\Models\Balance;
 use App\Models\Commission;
 use App\Models\ReferralUser;
+use App\Models\Setting;
+use App\Models\Transaction;
 use App\Models\UnitUser;
 use App\Models\User;
 use App\Models\UserCommission;
@@ -27,6 +31,7 @@ class UserDashboardController extends Controller
         $data['totalPin'] = UnitUser::where('user_id', auth()->user()->id)->count();
         $data['totalPinUsed'] = UnitUser::where('user_id', auth()->user()->id)->where('is_used', 1)->count();
         $data['referralUser'] = ReferralUser::where('referral_id', auth()->user()->id)->get();
+        $data['balance'] = Balance::where('user_id', auth()->user()->id)->first();
         return view('user.dashboard', $data);
     }
 
@@ -180,4 +185,25 @@ class UserDashboardController extends Controller
         return redirect()->back()->with('error', actionMessage('error'));
 
     }
+
+    public function invoices(UserInvoiceListDataTabble $dataTable)
+    {
+        $data['sidebar'] = 'invoice';
+        return $dataTable->render('user.invoices', $data);
+    }
+
+    public function invoiceView($id)
+    {
+        $data['sidebar'] = 'invoice';
+        $data['transaction'] = Transaction::where('id', $id)->where('user_id', auth()->user()->id)->where('type', 'invoice')->first();
+        $data['setting'] = Setting::first();
+
+        if(!empty($data['transaction'])) {
+
+            return view('user.invoice_view', $data);
+        }
+
+         return redirect()->back()->with('error', actionMessage('notFound'));
+    }
 }
+

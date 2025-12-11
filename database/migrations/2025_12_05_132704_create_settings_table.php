@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('company_name')->nullable();
+            $table->text('address')->nullable();
+            $table->string('phone')->nullable();
             $table->text('logo')->nullable();
             $table->decimal('total_interest', 10, 2)->nullable();
             $table->text('params')->nullable();

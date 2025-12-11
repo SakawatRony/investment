@@ -18,6 +18,8 @@ class SettingsTableSeeder extends Seeder
             0 => [
                 'id' => 1,
                 'company_name' => 'Royal Glory Residence Ltd',
+                'address' => 'Plot – 4 & 6, Road 7, Sector 15, Uttara, Dhaka',
+                'phone' => "+880 1713482184",
                 'logo' => null,
                 'total_interest' => null,
                 'params' => null,

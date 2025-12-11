@@ -41,25 +41,25 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="unit_name">Unit*</label>
-                        <select class="form-control" name="unit_name" id="unit_name" required>
+                        <label for="unit_value">Unit*</label>
+                        <select class="form-control" name="unit_value" id="unit_value" required>
                             <option value="">Select Point</option>
-                            <option value="1 P">1 P</option>
-                            <option value="5 P">5 P</option>
-                            <option value="10 P">10 P</option>
-                            <option value="20 P">20 P</option>
-                            <option value="30 P">30 P</option>
-                            <option value="40 P">40 P</option>
-                            <option value="50 P">50 P</option>
-                            <option value="60 P">60 P</option>
-                            <option value="70 P">70 P</option>
-                            <option value="80 P">80 P</option>
-                            <option value="90 P">90 P</option>
-                            <option value="100 P">100 P</option>
+                            <option value="1">1 P</option>
+                            <option value="5">5 P</option>
+                            <option value="10">10 P</option>
+                            <option value="20">20 P</option>
+                            <option value="30">30 P</option>
+                            <option value="40">40 P</option>
+                            <option value="50">50 P</option>
+                            <option value="60">60 P</option>
+                            <option value="70">70 P</option>
+                            <option value="80">80 P</option>
+                            <option value="90">90 P</option>
+                            <option value="100">100 P</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="total_number">Total Number Of Pin*</label>
+                        <label for="total_number">Total Number of Pin*</label>
                         <input type="number" min="1" step="1" class="form-control" id="total_number" required name="total_number" value="{{ old('total_number')}}" placeholder="Total Number">
                     </div>
                 </div>
