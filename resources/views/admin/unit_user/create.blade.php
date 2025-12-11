@@ -43,17 +43,19 @@
                     <div class="form-group">
                         <label for="unit_name">Unit*</label>
                         <select class="form-control" name="unit_name" id="unit_name" required>
-                            <option value="">Select Unit</option>
-                            <option value="10 Unit">10 Unit</option>
-                            <option value="20 Unit">20 Unit</option>
-                            <option value="30 Unit">30 Unit</option>
-                            <option value="40 Unit">40 Unit</option>
-                            <option value="50 Unit">50 Unit</option>
-                            <option value="60 Unit">60 Unit</option>
-                            <option value="70 Unit">70 Unit</option>
-                            <option value="80 Unit">80 Unit</option>
-                            <option value="90 Unit">90 Unit</option>
-                            <option value="100 Unit">100 Unit</option>
+                            <option value="">Select Point</option>
+                            <option value="1 P">1 P</option>
+                            <option value="5 P">5 P</option>
+                            <option value="10 P">10 P</option>
+                            <option value="20 P">20 P</option>
+                            <option value="30 P">30 P</option>
+                            <option value="40 P">40 P</option>
+                            <option value="50 P">50 P</option>
+                            <option value="60 P">60 P</option>
+                            <option value="70 P">70 P</option>
+                            <option value="80 P">80 P</option>
+                            <option value="90 P">90 P</option>
+                            <option value="100 P">100 P</option>
                         </select>
                     </div>
                     <div class="form-group">

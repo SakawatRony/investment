@@ -77,7 +77,8 @@ class UserDashboardController extends Controller
                 $unitUser->is_used = 1;
                 $unitUser->save();
                 $request['referral_id'] = $unitUser->user_id;
-                $referral = ReferralUser::create($request->only('user_id', 'referral_id'));
+                $request['unit_user_id'] = $unitUser->id;
+                $referral = ReferralUser::create($request->only('user_id', 'referral_id', 'unit_user_id'));
 
                 //commission operation
                 $commissions = Commission::get();
