@@ -1,6 +1,22 @@
 /*Now the CSS Created by R.S*/
 * {margin: 0; padding: 0;}
 
+.white_color {
+    color:white!important;
+}
+
+.backgroundBlue {
+    background: #0d6efd;
+}
+
+.backgroundGreen {
+    background: #198754!important;
+}
+
+.backgroundYellow {
+    background: #ffc107!important;
+}
+
 .tree ul {
     padding-top: 20px; position: relative;
 
