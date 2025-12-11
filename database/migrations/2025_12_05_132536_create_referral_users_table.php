@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigInteger('id', true);
             $table->bigInteger('user_id')->index('users_user_id_foreign_idx');
             $table->bigInteger('referral_id')->index('users_referral_id_foreign_idx');
+            $table->bigInteger('unit_user_id')->index('users_unit_user_id_foreign_idx');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });

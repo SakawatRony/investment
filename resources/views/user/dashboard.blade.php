@@ -63,28 +63,48 @@
         <hr>
         <div class="row">
         <div class="col-md-12 d-flex justify-content-center">
+
         {{--Multi tier div--}}
         @if(isset($referralUser) && count($referralUser) > 0)
             <div class="tree">
-                <h3 class="mb-0 text-center">Here will show user tree</h3>
                 <ul>
                     <li>
-                        <a href="javascript:void(0)">{{ auth()->user()->user_name }}</a>
+                        <a class="white_color bg-success" href="javascript:void(0)"><h3>{{ auth()->user()->user_name }}</h3></a>
                         @php
                            $childs = $referralUser;
-
                         @endphp
                         <ul>
                             @foreach($childs as $child)
+                            @php
+                            $count = 1;
+                            @endphp
                                 <li>
-                                    <a href="javascript:void(0)">{{ $child->user?->user_name }}</a>
+                                    <a class="white_color bg-info" href="javascript:void(0)" title="{{ $child->unitUser?->unit_name }}"><h3>{{ $child->user?->user_name }}</h3></a>
                                     @php
                                         $grandChilds = App\Models\ReferralUser::where('referral_id', $child->user_id)->get()
                                     @endphp
                                     @if(!empty($grandChilds) && count($grandChilds) > 0)
-                                        @include('user.child', ['grandChilds' => $grandChilds])
-                                    @endif
+                                        {{-- @include('user.child', ['grandChilds' => $grandChilds, 'count' => $count]) --}}
+                                        <ul>
+                                            @foreach($grandChilds as $grand)
+                                                <li><a class="white_color bg-warning"  href="javascript:void(0)" title="{{ $grand->unitUser?->unit_name }}"><h3>{{ $grand->user?->user_name }}</h3></a>
+                                                    @php
+                                                        $grandgrandChilds = App\Models\ReferralUser::where('referral_id', $grand->user_id)->get();
+                                                    @endphp
+                                                    @if(!empty($grandgrandChilds) && count($grandgrandChilds) > 0)
 
+                                                    <ul>
+                                                        @foreach($grandgrandChilds as $grandgrand)
+                                                            <li><a class="white_color bg-danger"  href="javascript:void(0)" title="{{ $grandgrand->unitUser?->unit_name }}"><h3>{{ $grandgrand->user?->user_name }}</h3></a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </li>
                             @endforeach
                         </ul>
