@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\ReferralUser;
 use App\Models\Role;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
@@ -91,6 +92,15 @@ class UserController extends Controller
     public function destroy(Request $request)
     {
         $user = User::where('id', $request->id)->first();
+
+        $transaction = Transaction::where('user_id', $request->id);
+
+        if($transaction->exists()) {
+            return response()->json([
+                'status' => 0,
+                'message' => actionMessage('failCustom')
+            ]);
+        }
 
         if(!empty($user)) {
             $user->delete();

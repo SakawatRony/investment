@@ -19,6 +19,9 @@ return new class extends Migration
             $table->decimal('commission', 10, 2)->nullable();
             $table->text('params')->nullable();
             $table->string('type')->nullable();
+            $table->boolean('is_withdraw')->default(0);
+            $table->boolean('withdraw_approve')->default(0);
+            $table->boolean('withdraw_reject')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });

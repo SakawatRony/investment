@@ -45,7 +45,7 @@ class InvoiceController extends Controller
                     $data['sidebar'] = 'invoice';
                     $price = $userCommission->unitUser->unit_value * 10;
                     $commission = $userCommission->commission * $price / 100;
-                    $commission = round($commission);
+                    $commission = $commission;
 
                     $request['price'] = $price;
                     $request['user_id'] = $userCommission->to_user_id;
@@ -101,5 +101,36 @@ class InvoiceController extends Controller
     {
         $data['sidebar'] = 'generate_invoice';
         return $dataTable->render('admin.users.generated_invoice', $data);
+    }
+
+    public function invoiceWithdrawApprove($id)
+    {
+        $transaction = Transaction::where('id', $id)->where('type', 'invoice')->first();
+
+        if(!empty($transaction) && $transaction->is_withdraw == 1 && $transaction->withdraw_approve == 0 && $transaction->withdraw_reject == 0) {
+            $transaction->withdraw_approve  = 1;
+            $transaction->save();
+
+            $balance = Balance::where('user_id', $transaction->user_id)->first();
+            $balance->decrementBalance($transaction->commission);
+
+            return redirect()->back()->with('success', 'Request successfully approved.');
+        }
+
+        return redirect()->back()->with('error', actionMessage('notFound'));
+    }
+
+    public function invoiceWithdrawReject($id)
+    {
+        $transaction = Transaction::where('id', $id)->where('type', 'invoice')->first();
+
+        if(!empty($transaction) && $transaction->is_withdraw == 1 && $transaction->withdraw_approve == 0 && $transaction->withdraw_reject == 0) {
+            $transaction->withdraw_reject  = 1;
+            $transaction->save();
+
+            return redirect()->back()->with('success', 'Request successfully rejected.');
+        }
+
+        return redirect()->back()->with('error', actionMessage('notFound'));
     }
 }

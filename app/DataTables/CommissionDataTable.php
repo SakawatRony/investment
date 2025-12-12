@@ -26,10 +26,16 @@ class CommissionDataTable extends DataTable
             ->addColumn('commission', function ($users) {
                 return number_format($users->commission);
             })
+            ->addColumn('point', function ($users) {
+                return $users->unitUser?->unit_name;
+            })
+            ->addColumn('point_value', function ($users) {
+                return $users->unitUser?->unit_value * 10;
+            })
             ->addColumn('created_at', function ($users) {
                 return timeZoneformatDate($users->created_at) .'<br>'. timeZonegetTime($users->created_at);
             })
-            ->rawColumns(['id', 'from_user_id', 'from_refer_user_id', 'commission', 'created_at'])
+            ->rawColumns(['id', 'from_user_id', 'from_refer_user_id', 'point_value', 'point', 'commission', 'created_at'])
             ->make(true);
     }
 
@@ -56,6 +62,8 @@ class CommissionDataTable extends DataTable
             ->addColumn(['data' => 'from_user_id', 'name' => 'from_user_id', 'title' => 'From User'])
             ->addColumn(['data' => 'from_refer_user_id', 'name' => 'from_refer_user_id', 'title' => 'From Referral'])
             ->addColumn(['data' => 'commission', 'name' => 'commission', 'title' => 'Commission %'])
+            ->addColumn(['data' => 'point', 'name' => 'point', 'title' => 'Point'])
+            ->addColumn(['data' => 'point_value', 'name' => 'point_value', 'title' => 'Point Value'])
             ->addColumn(['data' => 'created_at', 'name' => 'created_at', 'title' => __('Created')])
             ->parameters([
                 'order'      => [0, 'DESC'],

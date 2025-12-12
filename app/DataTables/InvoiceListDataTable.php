@@ -33,6 +33,17 @@ class InvoiceListDataTable extends DataTable
 
                 $str = '<a data-bs-toggle="tooltip" title="Edit" href="' . route('admin.user.invoiceView', ['id' => $transactions->id]) . '" class="btn btn-primary">View</a>';
 
+                if($transactions->is_withdraw == 1 && $transactions->withdraw_approve == 0 && $transactions->withdraw_reject == 0) {
+                    $str .= '&nbsp;<a data-bs-toggle="tooltip" title="Click for withdraw request approve" href="' . route('admin.invoiceWithdrawApprove', ['id' => $transactions->id]) . '" onclick="return confirm(\'Are you sure you want to approve?\')" class="btn btn-warning">Approve?</a>';
+                    $str .= '&nbsp;<a data-bs-toggle="tooltip" title="Click for withdraw request reject" href="' . route('admin.invoiceWithdrawReject', ['id' => $transactions->id]) . '" onclick="return confirm(\'Are you sure you want to reject?\')" class="btn btn-danger">Reject?</a>';
+                } elseif($transactions->is_withdraw == 1 && $transactions->withdraw_approve == 1 && $transactions->withdraw_reject == 0) {
+                    $str .= '&nbsp;<a data-bs-toggle="tooltip" title="Already approved" href=javascript:void(0) class="btn btn-success">Approved</a>';
+                } elseif($transactions->is_withdraw == 1 && $transactions->withdraw_approve == 0 && $transactions->withdraw_reject == 1) {
+                    $str .= '&nbsp;<a data-bs-toggle="tooltip" title="Rejected" href=javascript:void(0) class="btn btn-danger">Rejected</a>';
+                } elseif($transactions->is_withdraw == 0 && $transactions->withdraw_approve == 0 && $transactions->withdraw_reject == 0) {
+                    $str .= '&nbsp;<a data-bs-toggle="tooltip" title="Available for withdraw" href=javascript:void(0) class="btn btn-primary">Available</a>';
+                }
+
                 return $str;
             })
             ->rawColumns(['id', 'user_id', 'unit_user_id', 'params', 'commission', 'created_at', 'action', 'price'])

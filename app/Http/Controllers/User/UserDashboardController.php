@@ -44,6 +44,13 @@ class UserDashboardController extends Controller
     public function commission(CommissionDataTable $dataTable)
     {
         $data['sidebar'] = 'commission';
+        $data['total_pont_value'] = UserCommission::where('to_user_id', auth()->id())
+                                    ->with(['unitUser' => function ($q) {
+                                        $q->selectRaw('id, unit_value, unit_value * 10 as calculated');
+                                    }])
+                                    ->get()
+                                    ->sum(fn($row) => $row->unitUser->calculated);
+
         return $dataTable->render('user.unit_user.commission', $data);
     }
 
@@ -204,6 +211,20 @@ class UserDashboardController extends Controller
         }
 
          return redirect()->back()->with('error', actionMessage('notFound'));
+    }
+
+    public function invoiceWithdraw($id)
+    {
+        $transaction = Transaction::where('id', $id)->where('user_id', auth()->user()->id)->where('type', 'invoice')->first();
+
+        if(!empty($transaction) && $transaction->is_withdraw == 0 && $transaction->withdraw_approve == 0 && $transaction->withdraw_reject == 0) {
+            $transaction->is_withdraw  = 1;
+            $transaction->save();
+
+            return redirect()->back()->with('success', 'Request successfully send to admin. Please wait for admin approval');
+        }
+
+        return redirect()->back()->with('error', actionMessage('notFound'));
     }
 }
 

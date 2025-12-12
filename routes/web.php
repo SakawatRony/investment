@@ -63,6 +63,9 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'permission'])->grou
 
     Route::get('/settings', [DashboardController::class, 'settings'])->name('settings');
     Route::post('/settings', [DashboardController::class, 'settingsUpdate'])->name('settingsUpdate');
+
+    Route::get('/invoice/withdraw/{id}', [InvoiceController::class, 'invoiceWithdrawApprove'])->name('invoiceWithdrawApprove');
+    Route::get('/invoice/withdraw-reject/{id}', [InvoiceController::class, 'invoiceWithdrawReject'])->name('invoiceWithdrawReject');
 });
 
 Route::name('user.')->prefix('user')->middleware(['auth'])->group(function () {
@@ -81,6 +84,7 @@ Route::name('user.')->prefix('user')->middleware(['auth'])->group(function () {
 
     Route::get('/invoices', [UserDashboardController::class, 'invoices'])->name('invoices');
     Route::get('/invoice/{id}', [UserDashboardController::class, 'invoiceView'])->name('invoiceView');
+    Route::get('/invoice/withdraw/{id}', [UserDashboardController::class, 'invoiceWithdraw'])->name('invoiceWithdraw');
 });
 
 Route::fallback(function () {

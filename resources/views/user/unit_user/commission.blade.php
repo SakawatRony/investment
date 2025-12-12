@@ -26,6 +26,12 @@
 <div class="app-content">
     <div class="container-fluid">
     <div class="row">
+        @if (!empty($total_pont_value) && $total_pont_value> 0)
+        <div class="col-md-12 d-flex justify-content-end">
+        <h3 class="text-primary"> Total Point Value: {{ $total_pont_value }}</h3>
+        </div>
+        @endif
+
         @include('layouts.includes.yajra_data_table')
         </div>
     </div>
