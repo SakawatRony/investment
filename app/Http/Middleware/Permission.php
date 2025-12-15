@@ -15,7 +15,7 @@ class Permission
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && auth()->user()->roleUser?->role_id == '1' || auth()->user()->roleUser?->role_id == '2') {
+        if (auth()->check() && auth()->user()->roleUser?->role_id != '3') {
                     return $next($request);
         }
 

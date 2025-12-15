@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\{ DashboardController, InvoiceController, LoginController, UnitController, UserController, UnitUserController};
+use App\Http\Controllers\Admin\{ DashboardController, InvoiceController, LoginController, SettingsController, UnitController, UserController, UnitUserController};
 use App\Http\Controllers\User\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
-//Route::match(['get', 'post'], '/registration', [LoginController::class, 'register'])->name('registration');
 Route::get( '/registration', [LoginController::class, 'signUp'])->name('signUp');
 Route::post( '/registration', [LoginController::class, 'register'])->name('registration');
 
@@ -56,13 +55,16 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'permission'])->grou
 
     Route::get('/user/all-commissions', [InvoiceController::class, 'index'])->name('user.allCommission');
     Route::get('/user/generate-invoice/{id}', [InvoiceController::class, 'invoice'])->name('user.generateInvoice');
-    // Route::post('/user/generate-invoice/{id}', [InvoiceController::class, 'invoice'])->name('user.generateInvoice.submit');
 
     Route::get('/user/invoices', [InvoiceController::class, 'invoiceList'])->name('user.invoices');
     Route::get('/user/invoice/{id}', [InvoiceController::class, 'invoiceView'])->name('user.invoiceView');
 
-    Route::get('/settings', [DashboardController::class, 'settings'])->name('settings');
-    Route::post('/settings', [DashboardController::class, 'settingsUpdate'])->name('settingsUpdate');
+    Route::get('/settings/company-details', [SettingsController::class, 'companyDetails'])->name('settings');
+    Route::post('/settings/company-details', [SettingsController::class, 'companyDetailsUpdate'])->name('settingsUpdate');
+
+    Route::get('/settings/permission', [SettingsController::class, 'permission'])->name('settings.permission');
+    Route::get('/settings/check-permission/{id}', [SettingsController::class, 'checkPermission'])->name('settings.permission.check');
+    Route::post('/settings/permission/{id}', [SettingsController::class, 'permissionUpdate'])->name('settings.permission.update');
 
     Route::get('/invoice/withdraw/{id}', [InvoiceController::class, 'invoiceWithdrawApprove'])->name('invoiceWithdrawApprove');
     Route::get('/invoice/withdraw-reject/{id}', [InvoiceController::class, 'invoiceWithdrawReject'])->name('invoiceWithdrawReject');

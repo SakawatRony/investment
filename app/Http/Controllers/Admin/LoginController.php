@@ -49,7 +49,9 @@ class LoginController extends Controller
 
     public function redirectRole()
     {
-        if(auth()->user()->roleUser?->role_id == '1' || auth()->user()->roleUser?->role_id == '2') {
+        if(auth()->user()->roleUser?->role_id != '3') {
+                session()->put('role_id', auth()->user()->roleUser?->role_id);
+                session()->put('permission', auth()->user()->roleUser?->role?->permissions);
                 return redirect()->intended(route('admin.dashboard'));
         } else {
             return redirect()->intended(route('user.dashboard'));

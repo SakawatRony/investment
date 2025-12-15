@@ -85,7 +85,28 @@ function actionMessage($data='success', $custom = '')
         'error' => 'Something went wrong!Try again.',
         'notFound' => $custom.' Not found.',
         'update' => $custom.' Updated Successfully.',
+        'notPermit' => $custom.' You are not permitted.',
     ];
 
     return $message[$data];
+}
+
+function checkUserPermission($action = '', $subAction = '')
+{
+    if(session()->get('role_id') == '1' || session()->get('role_id')  == '2') {
+        return true;
+    }
+
+    $permission = session()->get('permission');
+    $userPermission = json_decode($permission, true);
+    if(is_array($userPermission) && isset($userPermission['permission'])) {
+        $userPermission = $userPermission['permission'];
+
+        if(isset($userPermission[$action]) && isset($userPermission[$action][$subAction]) && $userPermission[$action][$subAction] == 'on') {
+            return true;
+        }
+    }
+
+    return false;
+
 }

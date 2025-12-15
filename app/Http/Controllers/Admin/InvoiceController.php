@@ -17,26 +17,21 @@ class InvoiceController extends Controller
 {
     public function index(ApplicableInvoiceDatTable $dataTable)
     {
+        if(! checkUserPermission('applicable_invoice', 'view')) {
+            return redirect()->back()->with('error', actionMessage('notPermit'));
+        }
+
         $data['sidebar'] = 'invoice';
         return $dataTable->render('admin.users.applicable_invoice', $data);
     }
 
-    // public function generate($id)
-    // {
-    //     $userCommission = UserCommission::where('id', $id)->where('is_invoice', 0)->first();
-
-    //     if(!empty($userCommission)) {
-    //         $data['sidebar'] = 'invoice';
-    //         $data['commission'] = $userCommission;
-
-    //         return view('admin.users.pre_invoice', $data);
-    //     }
-
-    //      return redirect()->back()->with('error', actionMessage('notFound'));
-    // }
-
     public function invoice(Request $request, $id)
     {
+
+        if(! checkUserPermission('applicable_invoice', 'generate_invoice')) {
+            return redirect()->back()->with('error', actionMessage('notPermit'));
+        }
+
        $userCommission = UserCommission::where('id', $id)->first();
        $data['sidebar'] = 'generate_invoice';
        try {
@@ -85,6 +80,10 @@ class InvoiceController extends Controller
 
     public function invoiceView($id)
     {
+        if(! checkUserPermission('generated_invoice', 'print')) {
+            return redirect()->back()->with('error', actionMessage('notPermit'));
+        }
+
         $data['sidebar'] = 'generate_invoice';
         $data['transaction'] = Transaction::where('id', $id)->where('type', 'invoice')->first();
         $data['setting'] = Setting::first();
@@ -99,12 +98,22 @@ class InvoiceController extends Controller
 
     public function invoiceList(InvoiceListDataTable $dataTable)
     {
+
+        if(! checkUserPermission('generated_invoice', 'view')) {
+            return redirect()->back()->with('error', actionMessage('notPermit'));
+        }
+
         $data['sidebar'] = 'generate_invoice';
         return $dataTable->render('admin.users.generated_invoice', $data);
     }
 
     public function invoiceWithdrawApprove($id)
     {
+
+        if(! checkUserPermission('generated_invoice', 'withdraw')) {
+            return redirect()->back()->with('error', actionMessage('notPermit'));
+        }
+
         $transaction = Transaction::where('id', $id)->where('type', 'invoice')->first();
 
         if(!empty($transaction) && $transaction->is_withdraw == 1 && $transaction->withdraw_approve == 0 && $transaction->withdraw_reject == 0) {
@@ -122,6 +131,11 @@ class InvoiceController extends Controller
 
     public function invoiceWithdrawReject($id)
     {
+
+        if(! checkUserPermission('generated_invoice', 'withdraw')) {
+            return redirect()->back()->with('error', actionMessage('notPermit'));
+        }
+
         $transaction = Transaction::where('id', $id)->where('type', 'invoice')->first();
 
         if(!empty($transaction) && $transaction->is_withdraw == 1 && $transaction->withdraw_approve == 0 && $transaction->withdraw_reject == 0) {

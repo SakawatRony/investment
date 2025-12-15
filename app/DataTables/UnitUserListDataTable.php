@@ -31,7 +31,7 @@ class UnitUserListDataTable extends DataTable
 
                 $str = '';
 
-                if($units->is_used != 1) {
+                if($units->is_used != 1 && checkUserPermission('unit', 'delete')) {
                     $str .= '<a data-bs-toggle="tooltip" title="Delete" href="javascript:void(0)" class="delete btn btn-danger" data-id="'.$units->id.'" data-toggle="modal" data-target="#delete_modal"><i class="bi bi-archive-fill"></i></a>';
                 } else {
                     $str = 'N/A';

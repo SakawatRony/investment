@@ -11,4 +11,9 @@ class Role extends Model
     {
         return $query->where('id','!=', '1');
     }
+
+    public function scopeNotId2($query)
+    {
+        return $query->where('id','!=', '2');
+    }
 }

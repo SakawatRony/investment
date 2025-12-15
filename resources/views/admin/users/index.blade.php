@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Royal Glory Residence Ltd')
+@section('title', 'Users')
 
 @section('content')
 <!--begin::App Content Header-->
@@ -28,9 +28,11 @@
     <div class="row">
         <div class="col-md-4"></div>
          <div class="col-md-4"></div>
+         @if (checkUserPermission('user', 'create'))
         <div class="col-md-4 d-flex justify-content-end">
            <a class="btn btn-primary" href="{{ route('admin.users.create')}}">Add User</a>
         </div>
+        @endif
         @include('layouts.includes.yajra_data_table')
         </div>
     </div>

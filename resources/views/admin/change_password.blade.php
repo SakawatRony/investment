@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Royal Glory Residence Ltd')
+@section('title', 'Change Password')
 
 @section('content')
 <!--begin::App Content Header-->

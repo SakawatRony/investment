@@ -28,9 +28,11 @@
     <div class="row">
         <div class="col-md-4"></div>
          <div class="col-md-4"></div>
+        @if (checkUserPermission('unit', 'create'))
         <div class="col-md-4 d-flex justify-content-end">
            <a class="btn btn-primary" href="{{ route('admin.units.user.create')}}">Add User Unit PINs</a>
         </div>
+        @endif
         @include('layouts.includes.yajra_data_table')
         </div>
     </div>

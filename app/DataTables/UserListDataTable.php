@@ -29,12 +29,14 @@ class UserListDataTable extends DataTable
             })
             ->addColumn('action', function ($users) {
 
-                $edit = '<a data-bs-toggle="tooltip" title="Edit" href="' . route('admin.users.edit', ['id' => $users->id]) . '" class="btn btn-primary"><i class="bi bi-arrow-right-square"></i></a>';
-
                 $str = '';
-                $str .= $edit;
 
-                if(auth()->user()->id != $users->id) {
+                if(checkUserPermission('user', 'update')) {
+                    $edit = '<a data-bs-toggle="tooltip" title="Edit" href="' . route('admin.users.edit', ['id' => $users->id]) . '" class="btn btn-primary"><i class="bi bi-arrow-right-square"></i></a>';
+                    $str .= $edit;
+                }
+
+                if(checkUserPermission('user', 'delete') && auth()->user()->id != $users->id) {
                     $str .= '<a data-bs-toggle="tooltip" title="Delete" href="javascript:void(0)" class="delete btn btn-danger" data-id="'.$users->id.'" data-toggle="modal" data-target="#delete_modal"><i class="bi bi-archive-fill"></i></a>';
                 }
 

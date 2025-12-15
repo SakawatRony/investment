@@ -13,6 +13,10 @@ class UnitUserController extends Controller
 {
     public function index(UnitUserListDataTable $dataTable)
     {
+        if(! checkUserPermission('unit', 'view')) {
+            return redirect()->back()->with('error', actionMessage('notPermit'));
+        }
+
          $data['sidebar'] = 'unit';
          $data['sidebar_sub'] = 'unit_users';
          return $dataTable->render('admin.unit_user.index', $data);
@@ -20,6 +24,10 @@ class UnitUserController extends Controller
 
     public function create()
     {
+        if(! checkUserPermission('unit', 'create')) {
+            return redirect()->back()->with('error', actionMessage('notPermit'));
+        }
+
         $data['sidebar'] = 'unit';
         $data['sidebar_sub'] = 'unit_users_create';
         return view('admin.unit_user.create', $data);
@@ -47,6 +55,10 @@ class UnitUserController extends Controller
 
     public function destroy(Request $request)
     {
+        if(! checkUserPermission('unit', 'delete')) {
+            return redirect()->back()->with('error', actionMessage('notPermit'));
+        }
+
         $unitUser = UnitUser::where('id', $request->id)->first();
 
         if(!empty($unitUser) && $unitUser->is_used == 0) {

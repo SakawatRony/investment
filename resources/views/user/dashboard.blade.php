@@ -1,6 +1,6 @@
 @extends('layouts.user.app2')
 
-@section('title', 'Royal Glory Residence Ltd')
+@section('title', 'Dashboard')
 
 @section('css')
  <link rel="stylesheet" href="{{ asset('public/css/custom/tree.css') }}" />

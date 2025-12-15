@@ -19,6 +19,10 @@ class UserController extends Controller
 {
     public function index(UserListDataTable $dataTable)
     {
+        if(! checkUserPermission('user', 'view')) {
+            return redirect()->back()->with('error', actionMessage('notPermit'));
+        }
+
          $data['sidebar'] = 'user';
          $data['sidebar_sub'] = 'users';
          return $dataTable->render('admin.users.index', $data);
@@ -26,6 +30,10 @@ class UserController extends Controller
 
     public function create()
     {
+        if(! checkUserPermission('user', 'create')) {
+            return redirect()->back()->with('error', actionMessage('notPermit'));
+        }
+
         $data['sidebar'] = 'user';
         $data['sidebar_sub'] = 'users_create';
         $data['roles'] = Role::notId()->get();
@@ -56,6 +64,10 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        if(! checkUserPermission('user', 'update')) {
+            return redirect()->back()->with('error', actionMessage('notPermit'));
+        }
+
         $user = User::where('id', $id)->first();
 
         if (!empty($user)) {
@@ -91,6 +103,11 @@ class UserController extends Controller
 
     public function destroy(Request $request)
     {
+
+        if(! checkUserPermission('user', 'delete')) {
+            return redirect()->back()->with('error', actionMessage('notPermit'));
+        }
+
         $user = User::where('id', $request->id)->first();
 
         $transaction = Transaction::where('user_id', $request->id);

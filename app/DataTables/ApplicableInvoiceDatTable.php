@@ -33,8 +33,10 @@ class ApplicableInvoiceDatTable extends DataTable
                 return number_format($users->commission);
             })
             ->addColumn('action', function ($users) {
-
-                $str = '<a data-bs-toggle="tooltip" title="Edit" href="' . route('admin.user.generateInvoice', ['id' => $users->id]) . '" class="btn btn-primary">Generate Invoice</a>';
+                $str = '';
+                if(checkUserPermission('applicable_invoice', 'generate_invoice')) {
+                    $str = '<a data-bs-toggle="tooltip" title="Edit" href="' . route('admin.user.generateInvoice', ['id' => $users->id]) . '" class="btn btn-primary">Generate Invoice</a>';
+                }
 
                 return $str;
             })

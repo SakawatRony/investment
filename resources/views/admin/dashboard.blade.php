@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Royal Glory Residence Ltd')
+@section('title', 'Dashboard')
 
 @section('content')
     <!--begin::App Content Header-->
@@ -8,6 +8,7 @@
         <!--begin::Container-->
         <div class="container-fluid">
         <!--begin::Row-->
+       @if (checkUserPermission('dashboard', 'view'))
         <div class="row">
               <!--begin::Col-->
               <div class="col-lg-3 col-6">
@@ -55,6 +56,7 @@
               </div>
               <!--end::Col-->
             </div>
+       @endif
         <!--end::Row-->
         </div>
         <!--end::Container-->

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'User Edit')
+@section('title', 'User Create')
 
 @section('content')
 <!--begin::App Content Header-->
