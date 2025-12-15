@@ -54,6 +54,7 @@ class LoginController extends Controller
                 session()->put('permission', auth()->user()->roleUser?->role?->permissions);
                 return redirect()->intended(route('admin.dashboard'));
         } else {
+            session()->put('role_id', auth()->user()->roleUser?->role_id);
             return redirect()->intended(route('user.dashboard'));
         }
     }
